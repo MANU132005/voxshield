@@ -1,0 +1,187 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { Mic, Square, Play, RotateCcw, Send, AlertCircle } from 'lucide-react';
+import { formatTime } from '../utils/audioUtils';
+import { WaveformVisualizer } from './WaveformVisualizer';
+
+interface AudioRecorderProps {
+  onAudioReady: (blob: Blob) => void;
+  isAnalyzing: boolean;
+}
+
+export const AudioRecorder: React.FC<AudioRecorderProps> = ({
+  onAudioReady,
+  isAnalyzing,
+}) => {
+  const [isRecording, setIsRecording] = useState<boolean>(false);
+  const [recordedBlob, setRecordedBlob] = useState<Blob | null>(null);
+  const [recordingTime, setRecordingTime] = useState<number>(0);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [micPermissionError, setMicPermissionError] = useState<string | null>(null);
+
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+  const timerIntervalRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
+      if (audioUrl) URL.revokeObjectURL(audioUrl);
+    };
+  }, [audioUrl]);
+
+  const startRecording = async () => {
+    setMicPermissionError(null);
+    setRecordedBlob(null);
+    setAudioUrl(null);
+    setRecordingTime(0);
+    audioChunksRef.current = [];
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+        setRecordedBlob(audioBlob);
+        const url = URL.createObjectURL(audioBlob);
+        setAudioUrl(url);
+
+        // Stop all audio tracks
+        stream.getTracks().forEach((track) => track.stop());
+      };
+
+      mediaRecorder.start();
+      setIsRecording(true);
+
+      timerIntervalRef.current = window.setInterval(() => {
+        setRecordingTime((prev) => prev + 1);
+      }, 1000);
+
+    } catch (err: any) {
+      setMicPermissionError(
+        'Microphone access denied or unavailable. You can also upload sample audio files.'
+      );
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+      if (timerIntervalRef.current) {
+        clearInterval(timerIntervalRef.current);
+        timerIntervalRef.current = null;
+      }
+    }
+  };
+
+  const handleSendForAnalysis = () => {
+    if (recordedBlob) {
+      onAudioReady(recordedBlob);
+    }
+  };
+
+  const handleReset = () => {
+    setRecordedBlob(null);
+    setAudioUrl(null);
+    setRecordingTime(0);
+  };
+
+  return (
+    <div className="glass-panel rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+      
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center space-x-2">
+          <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+            <Mic className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-slate-100 text-base">Live Microphone Recorder</h3>
+            <p className="text-xs text-slate-400">Capture voice audio sample via browser mic</p>
+          </div>
+        </div>
+        {isRecording && (
+          <span className="flex items-center space-x-2 px-2.5 py-1 rounded-full bg-rose-950/80 border border-rose-500/30 text-rose-400 text-xs font-mono animate-pulse">
+            <span className="w-2 h-2 rounded-full bg-rose-500"></span>
+            <span>REC {formatTime(recordingTime)}</span>
+          </span>
+        )}
+      </div>
+
+      {/* Waveform Visualization Canvas */}
+      <WaveformVisualizer isActive={isRecording} />
+
+      {/* Error Alert */}
+      {micPermissionError && (
+        <div className="mb-4 p-3 rounded-xl bg-amber-950/40 border border-amber-500/30 flex items-center space-x-2 text-xs text-amber-300">
+          <AlertCircle className="w-4 h-4 shrink-0 text-amber-400" />
+          <span>{micPermissionError}</span>
+        </div>
+      )}
+
+      {/* Audio Playback Preview if recorded */}
+      {audioUrl && !isRecording && (
+        <div className="mb-4 p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+          <div className="flex items-center space-x-2 text-xs text-slate-300">
+            <Play className="w-4 h-4 text-cyan-400" />
+            <span>Recorded Voice Sample ({formatTime(recordingTime)})</span>
+          </div>
+          <audio src={audioUrl} controls className="h-7 w-48 text-xs" />
+        </div>
+      )}
+
+      {/* Action Buttons */}
+      <div className="flex items-center justify-center space-x-3 pt-2">
+        {!isRecording && !recordedBlob && (
+          <button
+            onClick={startRecording}
+            disabled={isAnalyzing}
+            className="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-medium text-sm shadow-lg shadow-cyan-600/20 transition-all disabled:opacity-50"
+          >
+            <Mic className="w-4 h-4" />
+            <span>Start Recording</span>
+          </button>
+        )}
+
+        {isRecording && (
+          <button
+            onClick={stopRecording}
+            className="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-medium text-sm shadow-lg shadow-rose-600/20 transition-all animate-pulse"
+          >
+            <Square className="w-4 h-4" />
+            <span>Stop Recording</span>
+          </button>
+        )}
+
+        {recordedBlob && !isRecording && (
+          <>
+            <button
+              onClick={handleReset}
+              disabled={isAnalyzing}
+              className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all"
+              title="Record Again"
+            >
+              <RotateCcw className="w-4 h-4" />
+            </button>
+            <button
+              onClick={handleSendForAnalysis}
+              disabled={isAnalyzing}
+              className="flex items-center space-x-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-sm shadow-lg shadow-emerald-600/20 transition-all disabled:opacity-50"
+            >
+              <Send className="w-4 h-4" />
+              <span>{isAnalyzing ? 'Analyzing...' : 'Analyze Audio'}</span>
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
