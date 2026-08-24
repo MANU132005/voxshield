@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional, Literal
 
 RiskStatus = Literal["SAFE", "SUSPICIOUS", "HIGH_RISK"]
@@ -35,8 +35,8 @@ class AnalysisResponse(BaseModel):
         description="List of human-readable diagnostic reasons"
     )
 
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "synthetic_score": 0.91,
                 "replay_score": 0.73,
@@ -49,3 +49,5 @@ class AnalysisResponse(BaseModel):
                 ]
             }
         }
+    )
+

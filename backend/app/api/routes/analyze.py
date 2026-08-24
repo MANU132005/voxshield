@@ -1,3 +1,4 @@
+import os
 from fastapi import APIRouter, File, UploadFile, HTTPException, status
 from app.schemas.analysis import AnalysisResponse
 from app.services.risk_engine.evaluator import RiskEngine
@@ -10,6 +11,8 @@ detector = AntiSpoofingDetector()
 replay_dsp = ReplayDetector()
 risk_engine = RiskEngine()
 
+ALLOWED_EXTENSIONS = {".wav", ".mp3", ".flac", ".m4a", ".ogg"}
+
 @router.post(
     "/analyze", 
     response_model=AnalysisResponse,
@@ -18,16 +21,20 @@ risk_engine = RiskEngine()
 )
 async def analyze_audio(file: UploadFile = File(...)):
     """
-    Accepts an uploaded audio file (.wav, .mp3, .flac, .m4a) and runs voice
+    Accepts an uploaded audio file (.wav, .mp3, .flac, .m4a, .ogg) and runs voice
     anti-spoofing and replay attack analysis.
-    
-    TODO: Integrate trained anti-spoofing model (Developer 1).
-    For now, returns contract-compliant analysis results.
     """
     if not file.filename:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, 
             detail="Uploaded file must have a valid filename."
+        )
+
+    _, ext = os.path.splitext(file.filename)
+    if not ext or ext.lower() not in ALLOWED_EXTENSIONS:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, 
+            detail=f"Unsupported audio format '{ext}'. Allowed formats: .wav, .mp3, .flac, .m4a, .ogg."
         )
 
     # Read binary content
