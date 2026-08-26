@@ -1,45 +1,122 @@
-import React, { useState } from 'react';
-import { Navbar } from './components/Navbar';
-import { Dashboard } from './pages/Dashboard';
-import { Analytics } from './pages/Analytics';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Header } from './components/layout/Header';
+import { TabNav, NavTabId } from './components/layout/TabNav';
+import { Footer } from './components/layout/Footer';
+import { SecurityDashboard } from './pages/SecurityDashboard';
+import { AnalyzeVoiceStudio } from './pages/AnalyzeVoiceStudio';
+import { ForensicInspector } from './pages/ForensicInspector';
+import { SystemArchitecture } from './pages/SystemArchitecture';
+import { useAudioAnalysis } from './hooks/useAudioAnalysis';
+import { checkBackendHealth, HealthCheckResult } from './api/healthApi';
+import { SessionAuditRecord } from './api/types';
 
 export const App: React.FC = () => {
-  const [isMockMode, setIsMockMode] = useState<boolean>(true);
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'analytics'>('dashboard');
+  const [activeTab, setActiveTab] = useState<NavTabId>('dashboard');
+  const [health, setHealth] = useState<HealthCheckResult | null>(null);
+  const [isCheckingHealth, setIsCheckingHealth] = useState<boolean>(false);
+
+  const {
+    isAnalyzing,
+    activeResult,
+    error,
+    sessionRecords,
+    runAnalysis,
+    selectRecord,
+    resetAnalysis,
+    clearSession,
+  } = useAudioAnalysis();
+
+  const pingHealth = useCallback(async () => {
+    setIsCheckingHealth(true);
+    try {
+      const res = await checkBackendHealth();
+      setHealth(res);
+    } catch (err) {
+      console.error('Failed to ping backend', err);
+    } finally {
+      setIsCheckingHealth(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    pingHealth();
+    const interval = setInterval(pingHealth, 15000); // Poll health every 15 seconds
+    return () => clearInterval(interval);
+  }, [pingHealth]);
+
+  const handleSelectRecord = (record: SessionAuditRecord) => {
+    selectRecord(record);
+    setActiveTab('analyze');
+  };
+
+  const handleNavigateToAnalyze = () => {
+    setActiveTab('analyze');
+  };
+
+  const handleNavigateToForensics = () => {
+    setActiveTab('forensics');
+  };
 
   return (
-    <div className="min-h-screen bg-[#090d16] text-slate-100 flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen bg-[#F5F2EB] text-[#2F4156] flex flex-col justify-between selection:bg-[#567C8D] selection:text-white font-sans">
       
       <div>
-        {/* Glassmorphism Header */}
-        <Navbar
-          isMockMode={isMockMode}
-          onToggleMockMode={setIsMockMode}
+        {/* Top SOC Console Header */}
+        <Header
+          health={health}
+          isCheckingHealth={isCheckingHealth}
+          onRefreshHealth={pingHealth}
           activeTab={activeTab}
-          setActiveTab={setActiveTab}
+          onSelectTab={(tab) => setActiveTab(tab as NavTabId)}
         />
 
-        {/* Main Content Area */}
+        {/* Navigation Switcher */}
+        <TabNav
+          activeTab={activeTab}
+          onSelectTab={setActiveTab}
+          hasActiveResult={!!activeResult}
+        />
+
+        {/* Main Routed Content Area */}
         <main className="max-w-7xl mx-auto px-4 lg:px-8 pt-8">
-          {activeTab === 'dashboard' ? (
-            <Dashboard isMockMode={isMockMode} />
-          ) : (
-            <Analytics />
+          {activeTab === 'dashboard' && (
+            <SecurityDashboard
+              health={health}
+              isCheckingHealth={isCheckingHealth}
+              onRefreshHealth={pingHealth}
+              sessionRecords={sessionRecords}
+              onSelectRecord={handleSelectRecord}
+              onNavigateToAnalyze={handleNavigateToAnalyze}
+              onClearSession={clearSession}
+            />
+          )}
+
+          {activeTab === 'analyze' && (
+            <AnalyzeVoiceStudio
+              isAnalyzing={isAnalyzing}
+              activeResult={activeResult}
+              error={error}
+              onAnalyzeAudio={runAnalysis}
+              onResetAnalysis={resetAnalysis}
+              onNavigateToForensics={handleNavigateToForensics}
+            />
+          )}
+
+          {activeTab === 'forensics' && (
+            <ForensicInspector
+              activeResult={activeResult}
+              onNavigateToAnalyze={handleNavigateToAnalyze}
+            />
+          )}
+
+          {activeTab === 'specs' && (
+            <SystemArchitecture />
           )}
         </main>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-800/80 py-6 px-4 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
-          <p>© 2026 VoxShield AI - Smart India Hackathon Project</p>
-          <p className="flex items-center space-x-2">
-            <span>Dev 1: Backend/AI</span>
-            <span>•</span>
-            <span>Dev 2: Frontend/UX</span>
-          </p>
-        </div>
-      </footer>
+      {/* Security Console Footer */}
+      <Footer />
 
     </div>
   );
