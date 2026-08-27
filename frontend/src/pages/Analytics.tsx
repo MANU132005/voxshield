@@ -7,34 +7,35 @@ export const Analytics: React.FC = () => {
       
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white tracking-tight">VoxShield API</h1>
-        <p className="text-xs text-slate-400 mt-1">Developer integration and endpoint reference.</p>
+        <span className="text-[11px] uppercase tracking-widest font-extrabold text-cyan-400">VOXSHIELD API</span>
+        <h1 className="text-xl sm:text-2xl font-bold text-white mt-1">Developer Integration & Architecture</h1>
+        <p className="text-xs text-slate-400 mt-1">REST API endpoints and system architecture for integrating VoxShield into security workflows.</p>
       </div>
 
       {/* Architecture Flow Diagram */}
       <div className="bg-slate-900/80 rounded-2xl p-6 border border-slate-800 space-y-4">
-        <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-2">
+        <h3 className="text-xs font-extrabold text-slate-300 uppercase tracking-widest flex items-center space-x-2">
           <Layers className="w-4 h-4 text-cyan-400" />
-          <span>System Pipeline Architecture</span>
+          <span>SYSTEM PIPELINE ARCHITECTURE</span>
         </h3>
 
         <div className="p-4 bg-slate-950 rounded-xl border border-slate-800 overflow-x-auto">
-          <div className="flex items-center justify-between min-w-[700px] text-xs font-mono">
-            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center">Browser</div>
-            <ArrowRight className="w-4 h-4 text-cyan-400 shrink-0" />
-            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center">Vercel Frontend</div>
-            <ArrowRight className="w-4 h-4 text-cyan-400 shrink-0" />
-            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center">FastAPI Backend</div>
-            <ArrowRight className="w-4 h-4 text-cyan-400 shrink-0" />
-            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center">Audio Preprocessor</div>
-            <ArrowRight className="w-4 h-4 text-cyan-400 shrink-0" />
-            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center">PyTorch ResNet</div>
-            <ArrowRight className="w-4 h-4 text-cyan-400 shrink-0" />
-            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center">Replay DSP</div>
-            <ArrowRight className="w-4 h-4 text-cyan-400 shrink-0" />
-            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center">Risk Engine</div>
-            <ArrowRight className="w-4 h-4 text-cyan-400 shrink-0" />
-            <div className="px-3 py-2 rounded-lg bg-cyan-950 border border-cyan-500/40 text-cyan-300 text-center font-bold">Security Verdict</div>
+          <div className="flex items-center justify-between min-w-[850px] text-[11px] font-mono">
+            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center font-bold">USER</div>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center font-bold">VOXSHIELD WEB APP</div>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center font-bold">FASTAPI</div>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center font-bold">AUDIO PROCESSING</div>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center font-bold">FEATURE EXTRACTION</div>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center font-bold">PYTORCH ANTI-SPOOFING + REPLAY DSP</div>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <div className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-center font-bold">RISK ENGINE</div>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <div className="px-3 py-2 rounded-lg bg-cyan-950 border border-cyan-500/50 text-cyan-300 text-center font-bold">SECURITY VERDICT</div>
           </div>
         </div>
       </div>

@@ -154,7 +154,7 @@ const encodeWav = (samples: Float32Array, sampleRate: number): Blob => {
   };
 
   return (
-    <div className="glass-panel rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+    <div className="bg-slate-900/60 rounded-2xl p-6 border border-slate-800 flex flex-col justify-between h-full">
       
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
@@ -163,14 +163,20 @@ const encodeWav = (samples: Float32Array, sampleRate: number): Blob => {
             <Mic className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-semibold text-slate-100 text-base">Live Microphone Recorder</h3>
-            <p className="text-xs text-slate-400">Capture voice audio sample via browser mic</p>
+            <h3 className="font-semibold text-slate-100 text-sm">Microphone Recorder</h3>
+            <p className="text-xs text-slate-400">
+              {isRecording
+                ? 'Listening for voice sample...'
+                : recordedBlob
+                ? 'Recording captured ✓'
+                : 'Click record to capture voice'}
+            </p>
           </div>
         </div>
         {isRecording && (
-          <span className="flex items-center space-x-2 px-2.5 py-1 rounded-full bg-rose-950/80 border border-rose-500/30 text-rose-400 text-xs font-mono animate-pulse">
+          <span className="flex items-center space-x-2 px-3 py-1 rounded-full bg-rose-950 border border-rose-500/40 text-rose-400 text-xs font-mono font-bold animate-pulse">
             <span className="w-2 h-2 rounded-full bg-rose-500"></span>
-            <span>REC {formatTime(recordingTime)}</span>
+            <span>● RECORDING {formatTime(recordingTime)}</span>
           </span>
         )}
       </div>
@@ -188,7 +194,7 @@ const encodeWav = (samples: Float32Array, sampleRate: number): Blob => {
 
       {/* Audio Playback Preview if recorded */}
       {audioUrl && !isRecording && (
-        <div className="mb-4 p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+        <div className="mb-4 p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
           <div className="flex items-center space-x-2 text-xs text-slate-300">
             <Play className="w-4 h-4 text-cyan-400" />
             <span>Recorded Voice Sample ({formatTime(recordingTime)})</span>
@@ -203,20 +209,20 @@ const encodeWav = (samples: Float32Array, sampleRate: number): Blob => {
           <button
             onClick={startRecording}
             disabled={isAnalyzing}
-            className="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-medium text-sm shadow-lg shadow-cyan-600/20 transition-all disabled:opacity-50"
+            className="flex items-center space-x-2 px-6 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs transition-all disabled:opacity-50"
           >
             <Mic className="w-4 h-4" />
-            <span>Start Recording</span>
+            <span>START RECORDING</span>
           </button>
         )}
 
         {isRecording && (
           <button
             onClick={stopRecording}
-            className="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-medium text-sm shadow-lg shadow-rose-600/20 transition-all animate-pulse"
+            className="flex items-center space-x-2 px-6 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs transition-all"
           >
             <Square className="w-4 h-4" />
-            <span>Stop Recording</span>
+            <span>STOP RECORDING</span>
           </button>
         )}
 
@@ -225,7 +231,7 @@ const encodeWav = (samples: Float32Array, sampleRate: number): Blob => {
             <button
               onClick={handleReset}
               disabled={isAnalyzing}
-              className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all"
+              className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all text-xs"
               title="Record Again"
             >
               <RotateCcw className="w-4 h-4" />
@@ -233,10 +239,10 @@ const encodeWav = (samples: Float32Array, sampleRate: number): Blob => {
             <button
               onClick={handleSendForAnalysis}
               disabled={isAnalyzing}
-              className="flex items-center space-x-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-sm shadow-lg shadow-emerald-600/20 transition-all disabled:opacity-50"
+              className="flex items-center space-x-2 px-6 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs uppercase tracking-wider transition-all disabled:opacity-50"
             >
               <Send className="w-4 h-4" />
-              <span>{isAnalyzing ? 'Analyzing...' : 'Analyze Audio'}</span>
+              <span>{isAnalyzing ? 'ANALYZING...' : 'ANALYZE AUDIO'}</span>
             </button>
           </>
         )}
