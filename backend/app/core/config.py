@@ -33,15 +33,35 @@ class Settings(BaseSettings):
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
     def parse_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
+        default_origins = [
+            "http://localhost:5173",
+            "http://localhost:3000",
+            "http://127.0.0.1:5173",
+            "https://voxshield.vercel.app",
+            "https://voxshield-eight.vercel.app",
+            "https://voxshield-frontend.vercel.app",
+            "https://voxshield-git-feature-backend-ai-manu132005.vercel.app",
+        ]
+        origins = []
         if isinstance(v, str):
             v_trimmed = v.strip()
             if v_trimmed.startswith("[") and v_trimmed.endswith("]"):
                 try:
-                    return json.loads(v_trimmed)
+                    origins = json.loads(v_trimmed)
                 except Exception:
-                    pass
-            return [origin.strip() for origin in v_trimmed.split(",") if origin.strip()]
-        return v
+                    origins = [v_trimmed]
+            else:
+                origins = [origin.strip() for origin in v_trimmed.split(",") if origin.strip()]
+        elif isinstance(v, list):
+            origins = v
+        else:
+            origins = default_origins
+
+        if "*" in origins:
+            return ["*"]
+
+        combined = list(dict.fromkeys(origins + default_origins))
+        return combined
 
     LOG_LEVEL: str = "INFO"
     MODEL_PATH: str = "models/asvspoof2019_la_recovery_exp01.pt"
