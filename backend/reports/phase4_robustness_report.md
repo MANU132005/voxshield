@@ -4,7 +4,7 @@
 **Conditions Evaluated**: `7`  
 **Stable Conditions**: `7 / 7`  
 **Stability Ratio**: `1.0`  
-**Mean Transformation Latency**: `0.5 ms`  
+**Mean Transformation Latency**: `0.44 ms`  
 
 ---
 
@@ -19,13 +19,13 @@
 
 | Condition ID | Type | Severity | Synthetic Score (Base / Trans) | Risk Score (Base / Trans) | Decision Change | Latency (ms) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `RC_01_REPLAY` | `REPLAY` | `MEDIUM` | `0.9986` → `0.9984` | `94.92` → `94.9` | `UNCHANGED` | `39.32` |
-| `RC_02_NOISE_20DB` | `NOISE` | `LOW` | `0.9986` → `0.9966` | `94.92` → `100.0` | `UNCHANGED` | `38.52` |
-| `RC_03_REVERB` | `REVERBERATION` | `MEDIUM` | `0.9986` → `0.9997` | `94.92` → `88.98` | `UNCHANGED` | `39.15` |
-| `RC_04_CODEC_8KHZ` | `COMPRESSION` | `MEDIUM` | `0.9986` → `0.9986` | `94.92` → `94.92` | `UNCHANGED` | `38.18` |
-| `RC_05_CLIPPING_07` | `CLIPPING` | `HIGH` | `0.9986` → `0.8517` | `94.92` → `86.1` | `UNCHANGED` | `37.28` |
-| `RC_06_SYNTH_VAR` | `SYNTHETIC_VARIATION` | `MEDIUM` | `0.9986` → `0.9986` | `94.92` → `94.92` | `UNCHANGED` | `41.12` |
-| `RC_07_PERTURBATION` | `PERTURBATION` | `LOW` | `0.9986` → `0.9911` | `94.92` → `94.47` | `UNCHANGED` | `41.28` |
+| `RC_01_REPLAY` | `REPLAY` | `MEDIUM` | `0.9986` → `0.9984` | `94.92` → `94.9` | `UNCHANGED` | `32.93` |
+| `RC_02_NOISE_20DB` | `NOISE` | `LOW` | `0.9986` → `0.9966` | `94.92` → `100.0` | `UNCHANGED` | `32.81` |
+| `RC_03_REVERB` | `REVERBERATION` | `MEDIUM` | `0.9986` → `0.9997` | `94.92` → `88.98` | `UNCHANGED` | `29.81` |
+| `RC_04_CODEC_8KHZ` | `COMPRESSION` | `MEDIUM` | `0.9986` → `0.9986` | `94.92` → `94.92` | `UNCHANGED` | `30.44` |
+| `RC_05_CLIPPING_07` | `CLIPPING` | `HIGH` | `0.9986` → `0.8517` | `94.92` → `86.1` | `UNCHANGED` | `32.11` |
+| `RC_06_SYNTH_VAR` | `SYNTHETIC_VARIATION` | `MEDIUM` | `0.9986` → `0.9986` | `94.92` → `94.92` | `UNCHANGED` | `31.22` |
+| `RC_07_PERTURBATION` | `PERTURBATION` | `LOW` | `0.9986` → `0.9911` | `94.92` → `94.47` | `UNCHANGED` | `34.0` |
 
 ---
 
