@@ -1,0 +1,63 @@
+{
+  "environment": {
+    "python_version": "3.11.9",
+    "os": "Windows-10-10.0.26200-SP0",
+    "cpu_cores": 12,
+    "torch_version": "2.13.0+cpu"
+  },
+  "benchmark_config": {
+    "iterations": 50,
+    "sample_duration_seconds": 1.0,
+    "sample_rate": 16000
+  },
+  "latency_statistics": {
+    "audio_preprocessing": {
+      "min_ms": 0.07,
+      "max_ms": 0.19,
+      "mean_ms": 0.13,
+      "median_ms": 0.14,
+      "p95_ms": 0.17,
+      "p99_ms": 0.19
+    },
+    "feature_extraction": {
+      "min_ms": 1.81,
+      "max_ms": 3.99,
+      "mean_ms": 2.67,
+      "median_ms": 2.68,
+      "p95_ms": 3.16,
+      "p99_ms": 3.83
+    },
+    "neural_anti_spoofing_inference": {
+      "min_ms": 4.95,
+      "max_ms": 9.0,
+      "mean_ms": 6.48,
+      "median_ms": 6.36,
+      "p95_ms": 7.69,
+      "p99_ms": 8.86
+    },
+    "acoustic_replay_dsp": {
+      "min_ms": 1.42,
+      "max_ms": 2.76,
+      "mean_ms": 2.27,
+      "median_ms": 2.42,
+      "p95_ms": 2.57,
+      "p99_ms": 2.7
+    },
+    "risk_evaluation": {
+      "min_ms": 0.08,
+      "max_ms": 0.22,
+      "mean_ms": 0.14,
+      "median_ms": 0.15,
+      "p95_ms": 0.18,
+      "p99_ms": 0.21
+    },
+    "end_to_end_pipeline": {
+      "min_ms": 9.1,
+      "max_ms": 14.33,
+      "mean_ms": 11.71,
+      "median_ms": 11.79,
+      "p95_ms": 13.18,
+      "p99_ms": 14.25
+    }
+  }
+}

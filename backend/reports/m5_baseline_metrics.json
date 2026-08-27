@@ -1,0 +1,502 @@
+{
+  "evaluation_date": "2026-08-24",
+  "checkpoint_path": "models/anti_spoofing_resnet.pt",
+  "model_version": "resnet18_logmel_v1.0",
+  "test_sample_count": 60,
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "roc_auc": 1.0,
+    "eer": 0.0
+  },
+  "confusion_matrix": {
+    "true_negatives": 29,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "true_positives": 31
+  },
+  "samples": [
+    {
+      "sample_id": "test_sample_001",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_002",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_003",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_004",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_005",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_006",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_007",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_008",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_009",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_010",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_011",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_012",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_013",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_014",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_015",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_016",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_017",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_018",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_019",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_020",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_021",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_022",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_023",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_024",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_025",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_026",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_027",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_028",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_029",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_030",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_031",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_032",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_033",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_034",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_035",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_036",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_037",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_038",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_039",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_040",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_041",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_042",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_043",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_044",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_045",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_046",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_047",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_048",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_049",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_050",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_051",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_052",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_053",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_054",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_055",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_056",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_057",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_058",
+      "ground_truth": "genuine",
+      "predicted_class": "genuine",
+      "synthetic_score": 0.0,
+      "confidence": 1.0,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_059",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    },
+    {
+      "sample_id": "test_sample_060",
+      "ground_truth": "spoof",
+      "predicted_class": "spoof",
+      "synthetic_score": 1.0,
+      "confidence": 0.9999,
+      "correct": true
+    }
+  ]
+}

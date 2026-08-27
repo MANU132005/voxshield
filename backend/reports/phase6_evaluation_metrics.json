@@ -1,0 +1,26 @@
+{
+  "status": "COMPLETED",
+  "dataset": "ASVspoof 2019 Logical Access (LA) Evaluation Set",
+  "checkpoint_evaluated": "C:\\Users\\Lenovo\\voxshield\\backend\\models\\asvspoof2019_la_smoketest.pt",
+  "checkpoint_sha256": "c67d75337eac3a5935100ca8cc513d63d7cb06f02cfce56d4a7ea98360469289",
+  "checkpoint_provenance": "REAL_ASVSPOOF_SMOKETEST_3_EPOCH",
+  "sample_count": 71237,
+  "bonafide_count": 7355,
+  "spoof_count": 63882,
+  "eer": 0.5,
+  "eer_threshold": 0.0,
+  "roc_auc": 0.5,
+  "accuracy": 0.8968,
+  "precision": 0.8968,
+  "recall": 1.0,
+  "f1_score": 0.9456,
+  "far": 1.0,
+  "frr": 0.0,
+  "confusion_matrix": {
+    "tp": 63882,
+    "tn": 0,
+    "fp": 7355,
+    "fn": 0
+  },
+  "evaluation_duration_seconds": 4105.67
+}

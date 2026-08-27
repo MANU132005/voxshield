@@ -1,0 +1,7 @@
+{
+  "status": "CALIBRATED",
+  "method": "Platt Scaling (Logistic Calibration)",
+  "sample_count": 24844,
+  "brier_score": 0.0921,
+  "expected_calibration_error": 0.0072
+}

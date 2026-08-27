@@ -1,0 +1,47 @@
+{
+  "status": "COMPLETED",
+  "training_executed": true,
+  "dataset_path": "C:\\Users\\Lenovo\\voxshield\\backend\\datasets\\ASVspoof2019_LA\\LA",
+  "checkpoint_path": "C:\\Users\\Lenovo\\voxshield\\backend\\models\\asvspoof2019_la_smoketest.pt",
+  "checkpoint_sha256": "c67d75337eac3a5935100ca8cc513d63d7cb06f02cfce56d4a7ea98360469289",
+  "checkpoint_size_mb": 4.7,
+  "provenance": "REAL_ASVSPOOF_TRAINED",
+  "hyperparameters": {
+    "epochs": 3,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "optimizer": "Adam",
+    "seed": 42,
+    "compute_device": "cpu"
+  },
+  "best_epoch": 1,
+  "best_dev_loss": 0.3307,
+  "best_dev_acc": 0.8974,
+  "total_training_time_seconds": 8658.78,
+  "epoch_logs": [
+    {
+      "epoch": 1,
+      "train_loss": 0.3836,
+      "train_acc": 0.8597,
+      "dev_loss": 0.3307,
+      "dev_acc": 0.8974,
+      "duration_sec": 968.84
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.329,
+      "train_acc": 0.8983,
+      "dev_loss": 0.3308,
+      "dev_acc": 0.8974,
+      "duration_sec": 2368.43
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.3289,
+      "train_acc": 0.8983,
+      "dev_loss": 0.331,
+      "dev_acc": 0.8974,
+      "duration_sec": 5321.51
+    }
+  ]
+}

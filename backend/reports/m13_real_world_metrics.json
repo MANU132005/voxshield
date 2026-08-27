@@ -1,0 +1,15 @@
+{
+  "status": "BLOCKED \u2014 REAL ASVSPOOF DATASET NOT PRESENT",
+  "dataset_root": "C:\\Users\\Lenovo\\voxshield\\backend\\non_existent_dataset_directory_xyz",
+  "split": "eval",
+  "sample_count": 0,
+  "metrics": {
+    "accuracy": "N/A",
+    "precision": "N/A",
+    "recall": "N/A",
+    "f1_score": "N/A",
+    "roc_auc": "N/A",
+    "eer": "N/A",
+    "eer_threshold": "N/A"
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "overall_status": "BLOCKED",
+  "benchmark_certification": "BLOCKED",
+  "dataset_status": "DATASET_MISSING",
+  "checkpoint_status": "PROVENANCE_BLOCKED",
+  "leakage_status": "LEAKAGE_AUDIT_BLOCKED",
+  "metrics": null,
+  "confidence_intervals": null,
+  "calibration": {
+    "status": "CALIBRATION_BLOCKED",
+    "method": "None (Calibration Dataset Missing)",
+    "sample_count": 0,
+    "brier_score": null,
+    "expected_calibration_error": null
+  },
+  "claim_matrix": {
+    "architecture_pipeline": "VERIFIED",
+    "feature_extraction_pipeline": "VERIFIED",
+    "dsp_replay_engine": "VERIFIED",
+    "forensic_engine_architecture": "VERIFIED",
+    "latency_measurement": "MEASURED",
+    "asvspoof_2019_accuracy": "BLOCKED",
+    "asvspoof_2019_eer": "BLOCKED",
+    "asvspoof_real_benchmark": "UNVERIFIED",
+    "model_calibration": "UNVERIFIED",
+    "benchmark_certification": "UNVERIFIED"
+  },
+  "stages": [
+    {
+      "stage_id": 1,
+      "stage_name": "Environment Audit",
+      "status": "COMPLETED",
+      "duration_ms": 0.0,
+      "errors": [],
+      "warnings": [],
+      "evidence": {}
+    },
+    {
+      "stage_id": 2,
+      "stage_name": "Dataset Gate Verification",
+      "status": "DATASET_MISSING",
+      "duration_ms": 0.09,
+      "errors": [],
+      "warnings": [],
+      "evidence": {
+        "dataset_found": false,
+        "dataset_root": "C:\\Users\\Lenovo\\voxshield\\backend\\datasets\\ASVspoof2019_LA\\LA",
+        "error": "Dataset root directory does not exist."
+      }
+    },
+    {
+      "stage_id": 3,
+      "stage_name": "Protocol Audit",
+      "status": "DATASET_MISSING",
+      "duration_ms": 0.1,
+      "errors": [],
+      "warnings": [],
+      "evidence": {}
+    },
+    {
+      "stage_id": 4,
+      "stage_name": "Audio Integrity Audit",
+      "status": "DATASET_MISSING",
+      "duration_ms": 0.11,
+      "errors": [],
+      "warnings": [],
+      "evidence": {}
+    },
+    {
+      "stage_id": 5,
+      "stage_name": "Leakage Audit",
+      "status": "LEAKAGE_AUDIT_BLOCKED",
+      "duration_ms": 0.13,
+      "errors": [],
+      "warnings": [],
+      "evidence": {
+        "leakage_free": false,
+        "error": "Cannot audit leakage on missing dataset."
+      }
+    },
+    {
+      "stage_id": 6,
+      "stage_name": "Checkpoint Verification",
+      "status": "PROVENANCE_BLOCKED",
+      "duration_ms": 29.54,
+      "errors": [],
+      "warnings": [],
+      "evidence": {
+        "checkpoint_found": true,
+        "checkpoint_path": "C:\\Users\\Lenovo\\voxshield\\backend\\models\\anti_spoofing_resnet.pt",
+        "sha256_hash": "decd20c8d5ec9aff079d613b268d0857ab32fc655006ac11d485a08b613161a3",
+        "file_size_bytes": 4926385,
+        "file_size_mb": 4.7,
+        "nan_detected": false,
+        "inf_detected": false,
+        "num_batches_tracked": 72,
+        "provenance": "DEMO_DSP_SYNTHETIC_DATASET",
+        "provenance_note": "Model was trained for 8 epochs on DSP-generated synthetic signals (72 batches). Has zero real-world ASVspoof capability.",
+        "architecture": "VoiceAntiSpoofingResNet (2D Residual CNN)",
+        "input_shape": "[batch, 1, 80, 300]",
+        "status": "PASS \u2014 CHECKPOINT INTEGRITY VERIFIED"
+      }
+    },
+    {
+      "stage_id": 7,
+      "stage_name": "Provenance Verification",
+      "status": "PROVENANCE_BLOCKED",
+      "duration_ms": 29.64,
+      "errors": [],
+      "warnings": [],
+      "evidence": {
+        "provenance": "DEMO_DSP_SYNTHETIC_DATASET"
+      }
+    },
+    {
+      "stage_id": 8,
+      "stage_name": "Evaluation Eligibility Decision",
+      "status": "BLOCKED",
+      "duration_ms": 29.67,
+      "errors": [],
+      "warnings": [],
+      "evidence": {}
+    },
+    {
+      "stage_id": 9,
+      "stage_name": "Model Evaluation",
+      "status": "BLOCKED",
+      "duration_ms": 29.69,
+      "errors": [],
+      "warnings": [],
+      "evidence": {}
+    },
+    {
+      "stage_id": 10,
+      "stage_name": "Metric Calculation",
+      "status": "BLOCKED",
+      "duration_ms": 29.71,
+      "errors": [],
+      "warnings": [],
+      "evidence": {}
+    },
+    {
+      "stage_id": 11,
+      "stage_name": "Confidence Interval Calculation",
+      "status": "BLOCKED",
+      "duration_ms": 29.72,
+      "errors": [],
+      "warnings": [],
+      "evidence": {}
+    },
+    {
+      "stage_id": 12,
+      "stage_name": "Calibration Status",
+      "status": "BLOCKED",
+      "duration_ms": 29.74,
+      "errors": [],
+      "warnings": [],
+      "evidence": {}
+    },
+    {
+      "stage_id": 13,
+      "stage_name": "Reproducibility Verification",
+      "status": "BLOCKED",
+      "duration_ms": 29.76,
+      "errors": [],
+      "warnings": [],
+      "evidence": {}
+    },
+    {
+      "stage_id": 14,
+      "stage_name": "Benchmark Certification",
+      "status": "BLOCKED",
+      "duration_ms": 29.78,
+      "errors": [],
+      "warnings": [],
+      "evidence": {
+        "certified": false,
+        "checks": {
+          "dataset_ready": false,
+          "checkpoint_valid": false,
+          "provenance_real": false,
+          "leakage_free": false,
+          "real_evaluation_completed": false,
+          "sufficient_samples": false
+        },
+        "reason": "One or more certification conditions failed."
+      }
+    },
+    {
+      "stage_id": 15,
+      "stage_name": "Scientific ClaimGate Update",
+      "status": "COMPLETED",
+      "duration_ms": 29.86,
+      "errors": [],
+      "warnings": [],
+      "evidence": {
+        "architecture_pipeline": "VERIFIED",
+        "feature_extraction_pipeline": "VERIFIED",
+        "dsp_replay_engine": "VERIFIED",
+        "forensic_engine_architecture": "VERIFIED",
+        "latency_measurement": "MEASURED",
+        "asvspoof_2019_accuracy": "BLOCKED",
+        "asvspoof_2019_eer": "BLOCKED",
+        "asvspoof_real_benchmark": "UNVERIFIED",
+        "model_calibration": "UNVERIFIED",
+        "benchmark_certification": "UNVERIFIED"
+      }
+    },
+    {
+      "stage_id": 16,
+      "stage_name": "Report Generation",
+      "status": "COMPLETED",
+      "duration_ms": 29.9,
+      "errors": [],
+      "warnings": [],
+      "evidence": {}
+    }
+  ]
+}

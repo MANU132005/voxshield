@@ -1,0 +1,10 @@
+{
+  "phase3_status": "GENERALIZATION_ENGINE_VERIFIED",
+  "phase_coherence_score": 1.0,
+  "pitch_jitter_score": 1.0,
+  "hf_vocoder_artifact_score": 0.0033,
+  "generalization_risk_score": 0.401,
+  "baseline_model_version": "resnet18_logmel_v1.0",
+  "baseline_provenance": "DEMO_DSP_SYNTHETIC_DATASET",
+  "real_asvspoof_benchmark_status": "BLOCKED (Official ASVspoof 2019 LA FLAC dataset missing locally)"
+}

@@ -1,0 +1,5 @@
+{
+  "status": "PENDING_DATASET_DOWNLOAD",
+  "checkpoint": "./models/anti_spoofing_resnet.pt",
+  "note": "ASVspoof 2019 LA dataset protocols not present on local disk yet. Run dataset download script to complete full evaluation."
+}

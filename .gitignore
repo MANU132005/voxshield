@@ -60,12 +60,17 @@ dist-ssr/
 *.ckpt
 *.tflite
 *.safetensors
+*.npz
+*.npy
 backend/models/*
 !backend/models/.gitkeep
 backend/data/*
 !backend/data/.gitkeep
 datasets/
+backend/datasets/
 audio_samples/
+*.flac
+*.wav
 
 # IDE / Editor Files
 .vscode/

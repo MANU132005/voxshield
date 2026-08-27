@@ -1,0 +1,10 @@
+{
+  "status": "BLOCKED_DATASET \u2014 REAL ASVSPOOF TRAINING WAS NOT EXECUTED",
+  "training_executed": false,
+  "epochs_completed": 0,
+  "best_val_loss": "N/A",
+  "best_val_eer": "N/A",
+  "best_val_roc_auc": "N/A",
+  "training_time_seconds": 0.0,
+  "note": "Real ASVspoof training was blocked because the 15.2 GB FLAC audio dataset archive (LA.zip) is missing on local disk."
+}

@@ -1,0 +1,193 @@
+{
+  "status": "LIVE_ANALYSIS_COMPLETED",
+  "decision": "LIKELY_GENUINE",
+  "risk_level": "LOW",
+  "risk_score": 20.0,
+  "confidence_state": "SUPPORTED",
+  "confidence_score": 1.0,
+  "detectors": {
+    "neural_score": 0.0,
+    "replay_score": 0.5,
+    "spectral_score": 0.000435,
+    "temporal_score": 0.0,
+    "integrity_score": 3.01,
+    "generalization_score": 0.4004
+  },
+  "agreement": {
+    "agreement_state": "HIGH_AGREEMENT",
+    "agreed_detectors": [
+      "neural_detector",
+      "forensic_engine",
+      "generalization_extractor"
+    ],
+    "disagreeing_detectors": [
+      "replay_dsp_detector"
+    ],
+    "dominant_evidence_type": "NATURAL_SPEECH",
+    "explanation": "Unanimous genuine agreement across 3 detection modules."
+  },
+  "temporal_stability": {
+    "stability_state": "STABLE_GENUINE",
+    "variance_score": 0.0,
+    "consecutive_agreements": 5,
+    "window_count": 5,
+    "explanation": "Stable genuine characteristics consistently observed across all 5 temporal windows."
+  },
+  "windows": [
+    {
+      "window_index": 0,
+      "start_time_seconds": 0.0,
+      "end_time_seconds": 1.0,
+      "synthetic_score": 0.0,
+      "replay_score": 0.5,
+      "risk_score": 20.0,
+      "confidence": 0.75,
+      "decision": "LIKELY_GENUINE",
+      "dominant_signal": "acoustic_replay"
+    },
+    {
+      "window_index": 1,
+      "start_time_seconds": 0.5,
+      "end_time_seconds": 1.5,
+      "synthetic_score": 0.0,
+      "replay_score": 0.5,
+      "risk_score": 20.0,
+      "confidence": 0.75,
+      "decision": "LIKELY_GENUINE",
+      "dominant_signal": "acoustic_replay"
+    },
+    {
+      "window_index": 2,
+      "start_time_seconds": 1.0,
+      "end_time_seconds": 2.0,
+      "synthetic_score": 0.0,
+      "replay_score": 0.5,
+      "risk_score": 20.0,
+      "confidence": 0.75,
+      "decision": "LIKELY_GENUINE",
+      "dominant_signal": "acoustic_replay"
+    },
+    {
+      "window_index": 3,
+      "start_time_seconds": 1.5,
+      "end_time_seconds": 2.5,
+      "synthetic_score": 0.0,
+      "replay_score": 0.5,
+      "risk_score": 20.0,
+      "confidence": 0.75,
+      "decision": "LIKELY_GENUINE",
+      "dominant_signal": "acoustic_replay"
+    },
+    {
+      "window_index": 4,
+      "start_time_seconds": 2.0,
+      "end_time_seconds": 3.0,
+      "synthetic_score": 0.0,
+      "replay_score": 0.5,
+      "risk_score": 20.0,
+      "confidence": 0.75,
+      "decision": "LIKELY_GENUINE",
+      "dominant_signal": "acoustic_replay"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EV_REPLAY_INDICATOR_HIGH",
+      "category": "REPLAY",
+      "signal": "replay_score",
+      "value": 0.5,
+      "normalized_strength": 0.5,
+      "direction": "SUPPORTS_SPOOF",
+      "reliability": 0.85,
+      "status": "INFERRED",
+      "explanation": "Single-STFT DSP analysis indicates acoustic replay indicators (50.0%)."
+    },
+    {
+      "id": "EV_SPEC_FLAT_LOW",
+      "category": "SPECTRAL",
+      "signal": "spectral_flatness",
+      "value": 0.0013,
+      "normalized_strength": 0.75,
+      "direction": "SUPPORTS_SPOOF",
+      "reliability": 0.85,
+      "status": "INFERRED",
+      "explanation": "Extremely low spectral flatness detected (indicates unnatural harmonic resonance)."
+    },
+    {
+      "id": "EV_SPEC_ENTROPY_LOW",
+      "category": "SPECTRAL",
+      "signal": "spectral_entropy",
+      "value": 0.2019,
+      "normalized_strength": 0.7,
+      "direction": "SUPPORTS_SPOOF",
+      "reliability": 0.85,
+      "status": "INFERRED",
+      "explanation": "Abnormally low spectral entropy (indicates synthetic tone over-regularity)."
+    },
+    {
+      "id": "EV_SPEC_STATIONARY",
+      "category": "SPECTRAL",
+      "signal": "spectral_stationarity",
+      "value": 0.000435,
+      "normalized_strength": 0.8,
+      "direction": "SUPPORTS_SPOOF",
+      "reliability": 0.88,
+      "status": "INFERRED",
+      "explanation": "Unnatural spectral stationarity detected across time frames (vocoder frame repetition)."
+    },
+    {
+      "id": "EV_TEMP_ENERGY_FLAT",
+      "category": "TEMPORAL",
+      "signal": "energy_envelope_variation",
+      "value": 0.0,
+      "normalized_strength": 0.78,
+      "direction": "SUPPORTS_SPOOF",
+      "reliability": 0.85,
+      "status": "INFERRED",
+      "explanation": "Abnormally static energy envelope across duration (indicates synthetic constant volume)."
+    },
+    {
+      "id": "EV_INTEG_CREST_FACTOR_LOW",
+      "category": "INTEGRITY",
+      "signal": "crest_factor_db",
+      "value": 3.01,
+      "normalized_strength": 0.72,
+      "direction": "SUPPORTS_SPOOF",
+      "reliability": 0.88,
+      "status": "MEASURED",
+      "explanation": "Unusually low crest factor (3.01 dB) indicating heavy dynamic range compression."
+    },
+    {
+      "id": "EV_CONSIST_SYNTHETIC_OVER_REGULARITY",
+      "category": "CONSISTENCY",
+      "signal": "spectral_temporal_consistency",
+      "value": 0.0013,
+      "normalized_strength": 0.85,
+      "direction": "SUPPORTS_SPOOF",
+      "reliability": 0.9,
+      "status": "INFERRED",
+      "explanation": "Cross-signal agreement: Dual spectral flatness and temporal energy over-regularity strongly indicate synthetic vocoding."
+    }
+  ],
+  "counter_evidence": [],
+  "recommendation": "ACCEPT \u2014 Acoustic properties align with authentic natural speech.",
+  "processing_metadata": {
+    "total_duration_ms": 355.04,
+    "cold_start_ms": 82.51,
+    "mean_window_latency_ms": 15.63,
+    "windows_processed": 5,
+    "sample_rate": 16000,
+    "audio_duration_seconds": 3.0
+  },
+  "validation_metadata": {
+    "dataset_status": "DATASET_MISSING",
+    "benchmark_status": "BLOCKED",
+    "claim_guard_status": "ACTIVE",
+    "model_provenance": "DEMO_DSP_SYNTHETIC_DATASET"
+  },
+  "limitations": [
+    "Official ASVspoof 2019 LA dataset is missing on local disk; real-world benchmark metrics remain BLOCKED.",
+    "Baseline model checkpoint was trained on DSP synthetic demo signals.",
+    "Live analysis decisions reflect measured acoustic signal properties rather than official benchmark accuracy."
+  ]
+}

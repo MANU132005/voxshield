@@ -1,0 +1,8 @@
+{
+  "status": "BLOCKED",
+  "training_executed": false,
+  "reason": "REAL_ASVSPOOF_DATASET_MISSING",
+  "baseline_checkpoint_preserved": true,
+  "baseline_checkpoint_path": "backend/models/anti_spoofing_resnet.pt",
+  "baseline_provenance": "DEMO_DSP_SYNTHETIC_DATASET"
+}

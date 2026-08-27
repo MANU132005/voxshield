@@ -1,0 +1,15 @@
+{
+  "checkpoint_found": true,
+  "checkpoint_path": "C:\\Users\\Lenovo\\voxshield\\backend\\models\\anti_spoofing_resnet.pt",
+  "sha256_hash": "decd20c8d5ec9aff079d613b268d0857ab32fc655006ac11d485a08b613161a3",
+  "file_size_bytes": 4926385,
+  "file_size_mb": 4.7,
+  "nan_detected": false,
+  "inf_detected": false,
+  "num_batches_tracked": 72,
+  "provenance": "DEMO_DSP_SYNTHETIC_DATASET",
+  "provenance_note": "Model was trained for 8 epochs on DSP-generated synthetic signals (72 batches). Has zero real-world ASVspoof capability.",
+  "architecture": "VoiceAntiSpoofingResNet (2D Residual CNN)",
+  "input_shape": "[batch, 1, 80, 300]",
+  "status": "PASS \u2014 CHECKPOINT INTEGRITY VERIFIED"
+}

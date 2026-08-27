@@ -1,0 +1,65 @@
+{
+  "dataset_found": false,
+  "training_executed": false,
+  "status": "BLOCKED \u2014 REAL ASVSPOOF DATASET NOT PRESENT",
+  "dataset_root": "C:\\Users\\Lenovo\\voxshield\\backend\\non_existent_asvspoof_dataset",
+  "discovery_candidates_checked": [
+    "C:\\Users\\Lenovo\\voxshield\\backend\\non_existent_asvspoof_dataset",
+    "C:\\Users\\Lenovo\\voxshield\\backend\\datasets\\ASVspoof2019_LA",
+    "C:\\Users\\Lenovo\\voxshield\\datasets\\ASVspoof2019_LA\\LA",
+    "C:\\Users\\Lenovo\\datasets\\ASVspoof2019_LA\\LA"
+  ],
+  "selected_root": null,
+  "protocols_found": {
+    "train": false,
+    "dev": false,
+    "eval": false
+  },
+  "audio_directories_found": {
+    "train": false,
+    "dev": false,
+    "eval": false
+  },
+  "train": {
+    "protocol_entries": 0,
+    "audio_files": 0,
+    "bonafide": 0,
+    "spoof": 0,
+    "missing": "N/A",
+    "corrupt": "N/A"
+  },
+  "dev": {
+    "protocol_entries": 0,
+    "audio_files": 0,
+    "bonafide": 0,
+    "spoof": 0,
+    "missing": "N/A",
+    "corrupt": "N/A"
+  },
+  "eval": {
+    "protocol_entries": 0,
+    "audio_files": 0,
+    "bonafide": 0,
+    "spoof": 0,
+    "missing": "N/A",
+    "corrupt": "N/A"
+  },
+  "audio_integrity": {
+    "min_duration_sec": "N/A",
+    "max_duration_sec": "N/A",
+    "mean_duration_sec": "N/A",
+    "median_duration_sec": "N/A",
+    "sample_rate_distribution": {},
+    "channel_distribution": {},
+    "corrupt_file_count": 0
+  },
+  "leakage_analysis": {
+    "utterance_overlap": "N/A",
+    "speaker_overlap": "N/A",
+    "cross_split_reuse": "N/A"
+  },
+  "security_analysis": {
+    "security_status": "PASS",
+    "path_traversal_attempts": 0
+  }
+}

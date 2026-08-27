@@ -1,0 +1,16 @@
+{
+  "status": "PASS \u2014 PIPELINE 100% REPRODUCIBLE",
+  "reproducible": true,
+  "runs_tested": 5,
+  "baseline_run_metrics": {
+    "run": 1,
+    "synthetic_score": 0.0,
+    "replay_score": 0.5,
+    "risk_score": 20.0,
+    "forensic_decision": "LIKELY_GENUINE",
+    "confidence_indicator": 0.75,
+    "evidence_count": 7,
+    "explanation_summary": "Decision: LIKELY_GENUINE (Risk Score: 37.5/100.0, Confidence: MODERATE_MEASUREMENT_CONFIDENCE). Identified 7 primary spoof indicators and 7 counter-evidence items. Scientific Claim Status: INFERRED."
+  },
+  "timestamp": "2026-08-26 16:30:04"
+}

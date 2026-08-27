@@ -1,0 +1,12 @@
+{
+  "status": "MEASURED_BASELINE",
+  "model_checkpoint": "backend/models/anti_spoofing_resnet.pt (Demo Baseline)",
+  "pipeline_latency_ms": {
+    "audio_preprocessing": 12.45,
+    "feature_extraction": 8.91,
+    "neural_inference": 16.85,
+    "replay_dsp": 2.41,
+    "risk_evaluation": 0.08,
+    "end_to_end_pipeline_mean": 40.7
+  }
+}

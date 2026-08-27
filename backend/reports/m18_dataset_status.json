@@ -1,0 +1,31 @@
+{
+  "m18_status": "BLOCKED_DATASET",
+  "benchmark_certification": "BLOCKED",
+  "dataset_gate_status": "DATASET_MISSING",
+  "checkpoint_status": "PROVENANCE_BLOCKED",
+  "baseline_checkpoint": "backend/models/anti_spoofing_resnet.pt",
+  "baseline_provenance": "DEMO_DSP_SYNTHETIC_DATASET",
+  "dataset_path_inspected": "C:\\Users\\Lenovo\\voxshield\\backend\\datasets\\ASVspoof2019_LA\\LA",
+  "dataset_found": false,
+  "required_files": [
+    "ASVspoof2019.LA.cm.train.trn.txt",
+    "ASVspoof2019.LA.cm.dev.trl.txt",
+    "ASVspoof2019.LA.cm.eval.trl.txt",
+    "ASVspoof2019_LA_train/flac/*.flac",
+    "ASVspoof2019_LA_dev/flac/*.flac",
+    "ASVspoof2019_LA_eval/flac/*.flac"
+  ],
+  "download_instructions": "Download official 15.2 GB ASVspoof 2019 LA FLAC archive (LA.zip) from Edinburgh DataShare: https://datashare.ed.ac.uk/handle/10283/3336 and extract to backend/datasets/ASVspoof2019_LA/LA/",
+  "claim_matrix": {
+    "architecture_pipeline": "VERIFIED",
+    "feature_extraction_pipeline": "VERIFIED",
+    "dsp_replay_engine": "VERIFIED",
+    "forensic_engine_architecture": "VERIFIED",
+    "latency_measurement": "MEASURED",
+    "asvspoof_2019_accuracy": "BLOCKED",
+    "asvspoof_2019_eer": "BLOCKED",
+    "asvspoof_real_benchmark": "BLOCKED",
+    "model_calibration": "BLOCKED",
+    "benchmark_certification": "BLOCKED"
+  }
+}

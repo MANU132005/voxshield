@@ -1,0 +1,5 @@
+{
+  "status": "BLOCKED",
+  "leakage_gate_status": "LEAKAGE_AUDIT_BLOCKED",
+  "reason": "Cannot perform cross-split utterance/speaker leakage audit on missing dataset."
+}

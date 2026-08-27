@@ -1,0 +1,71 @@
+{
+  "environment": {
+    "python_version": "3.11.9",
+    "os": "Windows-10-10.0.26200-SP0",
+    "cpu_cores": 12,
+    "torch_version": "2.13.0+cpu"
+  },
+  "benchmark_config": {
+    "iterations": 50,
+    "sample_duration_seconds": 1.0,
+    "sample_rate": 16000
+  },
+  "latency_statistics": {
+    "audio_preprocessing": {
+      "min_ms": 0.17,
+      "max_ms": 0.42,
+      "mean_ms": 0.29,
+      "median_ms": 0.29,
+      "p95_ms": 0.35,
+      "p99_ms": 0.39
+    },
+    "feature_extraction": {
+      "min_ms": 3.42,
+      "max_ms": 6.06,
+      "mean_ms": 5.42,
+      "median_ms": 5.57,
+      "p95_ms": 5.91,
+      "p99_ms": 6.03
+    },
+    "neural_anti_spoofing_inference": {
+      "min_ms": 7.74,
+      "max_ms": 20.98,
+      "mean_ms": 16.93,
+      "median_ms": 17.66,
+      "p95_ms": 18.33,
+      "p99_ms": 19.74
+    },
+    "acoustic_replay_dsp": {
+      "min_ms": 2.31,
+      "max_ms": 5.29,
+      "mean_ms": 4.6,
+      "median_ms": 4.76,
+      "p95_ms": 5.02,
+      "p99_ms": 5.2
+    },
+    "risk_evaluation": {
+      "min_ms": 0.17,
+      "max_ms": 0.41,
+      "mean_ms": 0.3,
+      "median_ms": 0.31,
+      "p95_ms": 0.35,
+      "p99_ms": 0.39
+    },
+    "forensic_intelligence_engine": {
+      "min_ms": 3.97,
+      "max_ms": 9.89,
+      "mean_ms": 8.89,
+      "median_ms": 9.28,
+      "p95_ms": 9.68,
+      "p99_ms": 9.89
+    },
+    "end_to_end_pipeline": {
+      "min_ms": 18.28,
+      "max_ms": 42.2,
+      "mean_ms": 36.44,
+      "median_ms": 37.84,
+      "p95_ms": 38.85,
+      "p99_ms": 40.9
+    }
+  }
+}

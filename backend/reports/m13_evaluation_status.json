@@ -1,0 +1,12 @@
+{
+  "evaluation_status": "BLOCKED \u2014 REAL ASVSPOOF DATASET NOT PRESENT",
+  "dataset_found": false,
+  "dataset_root": "C:\\Users\\Lenovo\\voxshield\\backend\\datasets\\ASVspoof2019_LA\\LA",
+  "model_checkpoint": "C:\\Users\\Lenovo\\voxshield\\backend\\models\\anti_spoofing_resnet.pt",
+  "model_provenance": "DEMO_DSP_SYNTHETIC_DATASET",
+  "real_world_asvspoof_metrics_available": false,
+  "missing_requirements": [
+    "Official ASVspoof 2019 Logical Access (LA) 15.2 GB FLAC audio dataset archive (LA.zip)",
+    "ASVspoof 2019 protocol text files (ASVspoof2019.LA.cm.eval.trl.txt)"
+  ]
+}

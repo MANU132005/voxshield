@@ -1,0 +1,36 @@
+{
+  "status": "BLOCKED_DATASET",
+  "dataset_found": false,
+  "dataset_root": "C:\\Users\\Lenovo\\voxshield\\backend\\datasets\\ASVspoof2019_LA\\LA",
+  "protocol_files_found": {
+    "train": false,
+    "dev": false,
+    "eval": false
+  },
+  "train": {
+    "protocol_entries": 0,
+    "audio_files": 0,
+    "bonafide": 0,
+    "spoof": 0,
+    "missing": "N/A",
+    "corrupt": "N/A"
+  },
+  "dev": {
+    "protocol_entries": 0,
+    "audio_files": 0,
+    "bonafide": 0,
+    "spoof": 0,
+    "missing": "N/A",
+    "corrupt": "N/A"
+  },
+  "eval": {
+    "protocol_entries": 0,
+    "audio_files": 0,
+    "bonafide": 0,
+    "spoof": 0,
+    "missing": "N/A",
+    "corrupt": "N/A"
+  },
+  "cross_split_leakage": {},
+  "hard_block_reason": "Official ASVspoof 2019 Logical Access (LA) 15.2 GB FLAC dataset archive (LA.zip) is missing on local disk."
+}

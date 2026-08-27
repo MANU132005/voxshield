@@ -1,0 +1,51 @@
+{
+  "dataset_name": "ASVspoof 2019 Logical Access",
+  "dataset_root": "C:\\Users\\Lenovo\\voxshield\\backend\\datasets\\ASVspoof2019_LA\\LA",
+  "status": "INTEGRITY_VERIFIED",
+  "is_valid": true,
+  "train_split": {
+    "split_name": "train",
+    "audio_file_count": 25380,
+    "protocol_line_count": 25380,
+    "speakers_count": 20,
+    "bonafide_count": 2580,
+    "spoof_count": 22800,
+    "missing_audio_files": [],
+    "corrupt_audio_files": []
+  },
+  "dev_split": {
+    "split_name": "dev",
+    "audio_file_count": 24986,
+    "protocol_line_count": 24844,
+    "speakers_count": 20,
+    "bonafide_count": 2548,
+    "spoof_count": 22296,
+    "missing_audio_files": [],
+    "corrupt_audio_files": []
+  },
+  "eval_split": {
+    "split_name": "eval",
+    "audio_file_count": 71933,
+    "protocol_line_count": 71237,
+    "speakers_count": 67,
+    "bonafide_count": 7355,
+    "spoof_count": 63882,
+    "missing_audio_files": [],
+    "corrupt_audio_files": []
+  },
+  "total_audio_files": 122299,
+  "total_protocol_entries": 121461,
+  "sample_rate_hz": 16000,
+  "duration_stats_seconds": {
+    "mean": 3.0,
+    "min": 0.5,
+    "max": 10.0
+  },
+  "leakage_detected": false,
+  "leakage_details": [],
+  "disclosures": [
+    "Official ASVspoof 2019 LA dataset physical audit rule enforced.",
+    "Real-world training and benchmark certification require local physical dataset presence."
+  ],
+  "timestamp": "2026-08-27 12:11:46"
+}

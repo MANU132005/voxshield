@@ -1,0 +1,17 @@
+{
+  "status": "BLOCKED_DATASET \u2014 HELD-OUT EVALUATION WAS NOT EXECUTED",
+  "evaluation_executed": false,
+  "eval_split": "eval",
+  "sample_count": 0,
+  "metrics": {
+    "accuracy": "N/A",
+    "precision": "N/A",
+    "recall": "N/A",
+    "f1_score": "N/A",
+    "roc_auc": "N/A",
+    "eer": "N/A",
+    "eer_threshold": "N/A",
+    "far": "N/A",
+    "frr": "N/A"
+  }
+}
