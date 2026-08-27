@@ -25,6 +25,7 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "http://127.0.0.1:5173",
         "https://voxshield.vercel.app",
+        "https://voxshield-eight.vercel.app",
         "https://voxshield-frontend.vercel.app",
         "https://voxshield-git-feature-backend-ai-manu132005.vercel.app",
     ]
