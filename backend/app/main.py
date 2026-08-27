@@ -68,6 +68,7 @@ async def root():
     return {
         "message": "Welcome to VoxShield AI Audio Security API",
         "version": settings.VERSION,
+        "commit": "114cbff",
         "docs": f"{settings.API_V1_STR}/docs",
         "health": f"{settings.API_V1_STR}/health",
         "ready": f"{settings.API_V1_STR}/ready"
