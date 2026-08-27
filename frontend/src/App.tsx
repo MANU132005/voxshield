@@ -4,7 +4,7 @@ import { Dashboard } from './pages/Dashboard';
 import { Analytics } from './pages/Analytics';
 
 export const App: React.FC = () => {
-  const [isMockMode, setIsMockMode] = useState<boolean>(true);
+  const [isMockMode, setIsMockMode] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<'dashboard' | 'analytics'>('dashboard');
 
   return (

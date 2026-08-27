@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { UploadCloud, FileAudio, CheckCircle2, ShieldAlert, AlertTriangle, Sparkles } from 'lucide-react';
-import { formatFileSize } from '../utils/audioUtils';
+import { formatFileSize, createDemoWavBlob } from '../utils/audioUtils';
 import { RiskStatus } from '../types/analysis';
 
 interface AudioUploaderProps {
@@ -35,10 +35,15 @@ export const AudioUploader: React.FC<AudioUploaderProps> = ({
   };
 
   const handlePresetSelect = (name: string, type: RiskStatus) => {
-    const dummyBlob = new Blob(['RIFF....WAVEfmt ....data....'], { type: 'audio/wav' });
-    const dummyFile = new File([dummyBlob], `${name.toLowerCase().replace(/\s+/g, '_')}.wav`, { type: 'audio/wav' });
-    setSelectedFile(dummyFile);
-    onFileSelect(dummyFile, type);
+    const freqMap: Record<RiskStatus, number> = {
+      SAFE: 220,
+      SUSPICIOUS: 880,
+      HIGH_RISK: 1760
+    };
+    const validWavBlob = createDemoWavBlob(1.5, freqMap[type] || 440);
+    const demoFile = new File([validWavBlob], `${name.toLowerCase().replace(/\s+/g, '_')}.wav`, { type: 'audio/wav' });
+    setSelectedFile(demoFile);
+    onFileSelect(demoFile, type);
   };
 
   return (

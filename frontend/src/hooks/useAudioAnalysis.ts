@@ -6,7 +6,7 @@ export const useAudioAnalysis = () => {
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isMockMode, setIsMockMode] = useState<boolean>(true);
+  const [isMockMode, setIsMockMode] = useState<boolean>(false);
 
   const runAnalysis = async (
     fileOrBlob: File | Blob, 

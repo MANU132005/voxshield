@@ -3,13 +3,14 @@ import { AnalysisResult, RiskStatus } from '../types/analysis';
 import { mockAnalyzeAudio } from './mockApi';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
-const DEFAULT_USE_MOCK = import.meta.env.VITE_USE_MOCK_API !== 'false';
+const DEFAULT_USE_MOCK = import.meta.env.VITE_USE_MOCK_API === 'true';
 
 const apiClient = axios.create({
   baseURL: `${API_BASE_URL}/api/v1`,
   headers: {
     'Accept': 'application/json',
   },
+  timeout: 30000,
 });
 
 export const checkHealth = async (): Promise<{ status: string }> => {
@@ -45,8 +46,11 @@ export const analyzeAudio = async (
     });
 
     return response.data;
-  } catch (error) {
-    console.warn('Real FastAPI backend unreachable. Falling back to Mock API response.', error);
-    return await mockAnalyzeAudio(audioFile, presetStatus);
+  } catch (error: any) {
+    const errorDetail = error.response?.data?.detail 
+      || (error.code === 'ECONNABORTED' ? 'Backend request timed out.' : null)
+      || (error.response ? `HTTP ${error.response.status}: Analysis request failed.` : null)
+      || 'Unable to connect to VoxShield backend. Ensure FastAPI server is running on http://localhost:8000';
+    throw new Error(errorDetail);
   }
 };
