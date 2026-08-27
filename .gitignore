@@ -64,6 +64,7 @@ dist-ssr/
 *.npy
 backend/models/*
 !backend/models/.gitkeep
+!backend/models/asvspoof2019_la_recovery_exp01.pt
 backend/data/*
 !backend/data/.gitkeep
 datasets/
