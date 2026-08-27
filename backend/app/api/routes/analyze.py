@@ -23,7 +23,7 @@ risk_evaluator = RiskEvaluator()
 forensic_engine = ForensicEngine()
 decision_explainer = DecisionExplainer()
 
-ALLOWED_EXTENSIONS = {".wav", ".mp3", ".flac", ".m4a", ".ogg"}
+ALLOWED_EXTENSIONS = {".wav", ".mp3", ".flac", ".m4a", ".ogg", ".webm"}
 MAX_FILE_BYTES = settings.MAX_UPLOAD_SIZE_MB * 1024 * 1024
 
 

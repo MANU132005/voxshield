@@ -38,7 +38,16 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
+      
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+        ? 'audio/webm;codecs=opus'
+        : MediaRecorder.isTypeSupported('audio/webm')
+        ? 'audio/webm'
+        : MediaRecorder.isTypeSupported('audio/mp4')
+        ? 'audio/mp4'
+        : '';
+
+      const mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
       mediaRecorderRef.current = mediaRecorder;
 
       mediaRecorder.ondataavailable = (event) => {
@@ -48,9 +57,12 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
       };
 
       mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-        setRecordedBlob(audioBlob);
-        const url = URL.createObjectURL(audioBlob);
+        const actualMime = mediaRecorder.mimeType || 'audio/webm';
+        const ext = actualMime.includes('mp4') ? 'm4a' : actualMime.includes('webm') ? 'webm' : 'wav';
+        const rawBlob = new Blob(audioChunksRef.current, { type: actualMime });
+        const micFile = new File([rawBlob], `mic_recording.${ext}`, { type: actualMime });
+        setRecordedBlob(micFile);
+        const url = URL.createObjectURL(rawBlob);
         setAudioUrl(url);
 
         // Stop all audio tracks
