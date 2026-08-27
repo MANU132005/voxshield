@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AnalysisResult, RiskStatus } from '../types/analysis';
 import { mockAnalyzeAudio } from './mockApi';
 
-const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000').replace(/\/+$/, '');
+const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000').trim().replace(/\/+$/, '');
 const API_BASE_URL = rawBaseUrl.endsWith('/api/v1') ? rawBaseUrl : `${rawBaseUrl}/api/v1`;
 const DEFAULT_USE_MOCK = import.meta.env.VITE_USE_MOCK_API === 'true';
 
