@@ -3,7 +3,7 @@
   "conditions_evaluated": 7,
   "conditions_stable_count": 7,
   "stability_ratio": 1.0,
-  "mean_transformation_latency_ms": 0.48,
+  "mean_transformation_latency_ms": 0.5,
   "results": [
     {
       "condition_id": "RC_01_REPLAY",
@@ -32,11 +32,11 @@
         "evidence_added_count": 0,
         "evidence_removed_count": 0
       },
-      "baseline_latency_ms": 16.64,
-      "transformed_latency_ms": 13.7,
-      "transformation_latency_ms": 0.85,
-      "total_latency_ms": 31.19,
-      "timestamp": "2026-08-27 12:11:02"
+      "baseline_latency_ms": 19.68,
+      "transformed_latency_ms": 18.84,
+      "transformation_latency_ms": 0.8,
+      "total_latency_ms": 39.32,
+      "timestamp": "2026-08-27 12:25:50"
     },
     {
       "condition_id": "RC_02_NOISE_20DB",
@@ -67,11 +67,11 @@
         "evidence_added_count": 0,
         "evidence_removed_count": 2
       },
-      "baseline_latency_ms": 15.64,
-      "transformed_latency_ms": 16.25,
-      "transformation_latency_ms": 0.53,
-      "total_latency_ms": 32.42,
-      "timestamp": "2026-08-27 12:11:02"
+      "baseline_latency_ms": 19.12,
+      "transformed_latency_ms": 18.91,
+      "transformation_latency_ms": 0.49,
+      "total_latency_ms": 38.52,
+      "timestamp": "2026-08-27 12:25:50"
     },
     {
       "condition_id": "RC_03_REVERB",
@@ -102,11 +102,11 @@
         "evidence_added_count": 0,
         "evidence_removed_count": 4
       },
-      "baseline_latency_ms": 16.18,
-      "transformed_latency_ms": 13.03,
-      "transformation_latency_ms": 0.94,
-      "total_latency_ms": 30.15,
-      "timestamp": "2026-08-27 12:11:02"
+      "baseline_latency_ms": 19.35,
+      "transformed_latency_ms": 18.88,
+      "transformation_latency_ms": 0.92,
+      "total_latency_ms": 39.15,
+      "timestamp": "2026-08-27 12:25:50"
     },
     {
       "condition_id": "RC_04_CODEC_8KHZ",
@@ -137,11 +137,11 @@
         "evidence_added_count": 0,
         "evidence_removed_count": 0
       },
-      "baseline_latency_ms": 10.96,
-      "transformed_latency_ms": 34.36,
-      "transformation_latency_ms": 0.33,
-      "total_latency_ms": 45.65,
-      "timestamp": "2026-08-27 12:11:02"
+      "baseline_latency_ms": 18.9,
+      "transformed_latency_ms": 18.7,
+      "transformation_latency_ms": 0.57,
+      "total_latency_ms": 38.18,
+      "timestamp": "2026-08-27 12:25:50"
     },
     {
       "condition_id": "RC_05_CLIPPING_07",
@@ -172,11 +172,11 @@
         "evidence_added_count": 0,
         "evidence_removed_count": 0
       },
-      "baseline_latency_ms": 12.28,
-      "transformed_latency_ms": 16.18,
-      "transformation_latency_ms": 0.03,
-      "total_latency_ms": 28.49,
-      "timestamp": "2026-08-27 12:11:02"
+      "baseline_latency_ms": 18.62,
+      "transformed_latency_ms": 18.61,
+      "transformation_latency_ms": 0.04,
+      "total_latency_ms": 37.28,
+      "timestamp": "2026-08-27 12:25:50"
     },
     {
       "condition_id": "RC_06_SYNTH_VAR",
@@ -205,11 +205,11 @@
         "evidence_added_count": 0,
         "evidence_removed_count": 2
       },
-      "baseline_latency_ms": 15.75,
-      "transformed_latency_ms": 16.45,
-      "transformation_latency_ms": 0.36,
-      "total_latency_ms": 32.56,
-      "timestamp": "2026-08-27 12:11:02"
+      "baseline_latency_ms": 19.24,
+      "transformed_latency_ms": 21.54,
+      "transformation_latency_ms": 0.34,
+      "total_latency_ms": 41.12,
+      "timestamp": "2026-08-27 12:25:51"
     },
     {
       "condition_id": "RC_07_PERTURBATION",
@@ -240,11 +240,11 @@
         "evidence_added_count": 0,
         "evidence_removed_count": 0
       },
-      "baseline_latency_ms": 15.17,
-      "transformed_latency_ms": 13.84,
+      "baseline_latency_ms": 20.83,
+      "transformed_latency_ms": 20.1,
       "transformation_latency_ms": 0.35,
-      "total_latency_ms": 29.36,
-      "timestamp": "2026-08-27 12:11:02"
+      "total_latency_ms": 41.28,
+      "timestamp": "2026-08-27 12:25:51"
     }
   ],
   "disclosures": [
