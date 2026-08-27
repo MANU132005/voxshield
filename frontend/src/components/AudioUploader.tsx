@@ -34,29 +34,17 @@ export const AudioUploader: React.FC<AudioUploaderProps> = ({
     }
   };
 
-  const handlePresetSelect = (name: string, type: RiskStatus) => {
-    const freqMap: Record<RiskStatus, number> = {
-      SAFE: 220,
-      SUSPICIOUS: 880,
-      HIGH_RISK: 1760
-    };
-    const validWavBlob = createDemoWavBlob(1.5, freqMap[type] || 440);
-    const demoFile = new File([validWavBlob], `${name.toLowerCase().replace(/\s+/g, '_')}.wav`, { type: 'audio/wav' });
-    setSelectedFile(demoFile);
-    onFileSelect(demoFile, type);
-  };
-
   return (
-    <div className="glass-panel rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+    <div className="bg-slate-900/60 rounded-2xl p-6 border border-slate-800 flex flex-col justify-between h-full">
       
       {/* Header */}
       <div className="flex items-center space-x-2 mb-4">
-        <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
+        <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
           <UploadCloud className="w-5 h-5" />
         </div>
         <div>
-          <h3 className="font-semibold text-slate-100 text-base">Audio File Upload & Presets</h3>
-          <p className="text-xs text-slate-400">Drag & drop WAV, MP3, FLAC audio files or use demo samples</p>
+          <h3 className="font-semibold text-slate-100 text-sm">Upload Audio File</h3>
+          <p className="text-xs text-slate-400">Select or drop a voice file for analysis</p>
         </div>
       </div>
 
@@ -66,10 +54,10 @@ export const AudioUploader: React.FC<AudioUploaderProps> = ({
         onDragLeave={() => setIsDragOver(false)}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
-        className={`border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-all ${
+        className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all flex-1 flex flex-col justify-center items-center ${
           isDragOver
             ? 'border-cyan-400 bg-cyan-500/10'
-            : 'border-slate-800 hover:border-slate-700 bg-slate-900/40 hover:bg-slate-900/80'
+            : 'border-slate-800 hover:border-slate-700 bg-slate-950/40 hover:bg-slate-950/80'
         }`}
       >
         <input
@@ -79,54 +67,19 @@ export const AudioUploader: React.FC<AudioUploaderProps> = ({
           className="hidden"
           onChange={handleFileChange}
         />
-        <div className="flex flex-col items-center justify-center py-2 space-y-2">
-          <FileAudio className="w-8 h-8 text-cyan-400 opacity-80" />
-          <p className="text-xs font-medium text-slate-300">
+        <div className="flex flex-col items-center justify-center space-y-2 py-3">
+          <FileAudio className="w-8 h-8 text-cyan-400 opacity-90" />
+          <p className="text-xs font-medium text-slate-200">
             {selectedFile ? (
               <span className="text-cyan-400 font-semibold">{selectedFile.name} ({formatFileSize(selectedFile.size)})</span>
             ) : (
               <span>Click to browse or drop audio file here</span>
             )}
           </p>
-          <span className="text-[10px] text-slate-500">Supports WAV, MP3, FLAC, M4A up to 25MB</span>
-        </div>
-      </div>
-
-      {/* Demo Preset Buttons for Quick Testing */}
-      <div className="mt-4 pt-3 border-t border-slate-800/80">
-        <div className="flex items-center space-x-1 mb-2 text-xs text-amber-400/90 font-medium">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-          <span>Quick Offline Presets (DEMO SIMULATION — NOT A REAL ANALYSIS):</span>
-        </div>
-        <div className="grid grid-cols-3 gap-2">
-          
-          <button
-            onClick={() => handlePresetSelect('Human Voice Sample', 'SAFE')}
-            disabled={isAnalyzing}
-            className="flex items-center justify-center space-x-1.5 p-2 rounded-xl bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-500/30 text-emerald-400 text-xs font-medium transition-all disabled:opacity-50"
-          >
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>Human (Demo)</span>
-          </button>
-
-          <button
-            onClick={() => handlePresetSelect('Replay Reverberation', 'SUSPICIOUS')}
-            disabled={isAnalyzing}
-            className="flex items-center justify-center space-x-1.5 p-2 rounded-xl bg-amber-950/40 hover:bg-amber-900/60 border border-amber-500/30 text-amber-400 text-xs font-medium transition-all disabled:opacity-50"
-          >
-            <AlertTriangle className="w-3.5 h-3.5" />
-            <span>Replay (Demo)</span>
-          </button>
-
-          <button
-            onClick={() => handlePresetSelect('AI Voice Clone', 'HIGH_RISK')}
-            disabled={isAnalyzing}
-            className="flex items-center justify-center space-x-1.5 p-2 rounded-xl bg-rose-950/40 hover:bg-rose-900/60 border border-rose-500/30 text-rose-400 text-xs font-medium transition-all disabled:opacity-50"
-          >
-            <ShieldAlert className="w-3.5 h-3.5" />
-            <span>AI Clone (Demo)</span>
-          </button>
-
+          <div className="text-[11px] text-slate-400 space-y-0.5">
+            <p>Supported formats: <strong className="text-slate-300">WAV, MP3, FLAC, M4A</strong></p>
+            <p>Maximum file size: <strong className="text-slate-300">25 MB</strong></p>
+          </div>
         </div>
       </div>
 
