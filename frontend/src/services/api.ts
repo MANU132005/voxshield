@@ -35,16 +35,25 @@ export const analyzeAudio = async (
   forceMock: boolean = DEFAULT_USE_MOCK,
   presetStatus?: RiskStatus
 ): Promise<AnalysisResult> => {
-  if (forceMock) {
-    return await mockAnalyzeAudio(audioFile, presetStatus);
+  if (forceMock || presetStatus) {
+    console.log('[VOXSHIELD] DEMO PRESET ANALYSIS SELECTED:', presetStatus || 'MOCK_MODE');
+    const mockRes = await mockAnalyzeAudio(audioFile, presetStatus);
+    return { ...mockRes, isDemo: true };
   }
+
+  const targetUrl = `${API_BASE_URL}/analyze`;
+  console.log('[VOXSHIELD] REAL API ANALYSIS - Sending POST request to:', targetUrl);
 
   try {
     const formData = new FormData();
+    const actualMime = audioFile.type || 'audio/webm';
+    const ext = actualMime.includes('mp4') ? 'm4a' : actualMime.includes('webm') ? 'webm' : 'wav';
+
     const fileToUpload = audioFile instanceof File 
       ? audioFile 
-      : new File([audioFile], 'mic_recording.wav', { type: 'audio/wav' });
+      : new File([audioFile], `mic_recording.${ext}`, { type: actualMime });
 
+    console.log(`[VOXSHIELD] Payload filename: ${fileToUpload.name}, MIME: ${fileToUpload.type}, Size: ${fileToUpload.size} bytes`);
     formData.append('file', fileToUpload);
 
     const response = await apiClient.post<AnalysisResult>('/analyze', formData, {
@@ -53,12 +62,15 @@ export const analyzeAudio = async (
       },
     });
 
-    return response.data;
+    console.log('[VOXSHIELD] Real Backend response received:', response.data);
+    return { ...response.data, isDemo: false };
   } catch (error: any) {
+    console.error('[VOXSHIELD] Real backend analysis failed:', error);
     const errorDetail = error.response?.data?.detail 
-      || (error.code === 'ECONNABORTED' ? 'Backend request timed out.' : null)
+      || (error.code === 'ECONNABORTED' ? 'Backend request timed out (30s).' : null)
       || (error.response ? `HTTP ${error.response.status}: Analysis request failed.` : null)
-      || 'Unable to connect to VoxShield backend. Ensure FastAPI server is running on http://localhost:8000';
-    throw new Error(errorDetail);
+      || 'Unable to connect to VoxShield backend at ' + targetUrl;
+
+    throw new Error(`Real backend analysis failed. No simulated result was used. Details: ${errorDetail}`);
   }
 };

@@ -94,9 +94,9 @@ export const AudioUploader: React.FC<AudioUploaderProps> = ({
 
       {/* Demo Preset Buttons for Quick Testing */}
       <div className="mt-4 pt-3 border-t border-slate-800/80">
-        <div className="flex items-center space-x-1 mb-2 text-xs text-slate-400 font-medium">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Quick Demo Test Presets:</span>
+        <div className="flex items-center space-x-1 mb-2 text-xs text-amber-400/90 font-medium">
+          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <span>Quick Offline Presets (DEMO SIMULATION — NOT A REAL ANALYSIS):</span>
         </div>
         <div className="grid grid-cols-3 gap-2">
           
@@ -106,7 +106,7 @@ export const AudioUploader: React.FC<AudioUploaderProps> = ({
             className="flex items-center justify-center space-x-1.5 p-2 rounded-xl bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-500/30 text-emerald-400 text-xs font-medium transition-all disabled:opacity-50"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>Human (Safe)</span>
+            <span>Human (Demo)</span>
           </button>
 
           <button
@@ -115,7 +115,7 @@ export const AudioUploader: React.FC<AudioUploaderProps> = ({
             className="flex items-center justify-center space-x-1.5 p-2 rounded-xl bg-amber-950/40 hover:bg-amber-900/60 border border-amber-500/30 text-amber-400 text-xs font-medium transition-all disabled:opacity-50"
           >
             <AlertTriangle className="w-3.5 h-3.5" />
-            <span>Replay (Suspicious)</span>
+            <span>Replay (Demo)</span>
           </button>
 
           <button
@@ -124,7 +124,7 @@ export const AudioUploader: React.FC<AudioUploaderProps> = ({
             className="flex items-center justify-center space-x-1.5 p-2 rounded-xl bg-rose-950/40 hover:bg-rose-900/60 border border-rose-500/30 text-rose-400 text-xs font-medium transition-all disabled:opacity-50"
           >
             <ShieldAlert className="w-3.5 h-3.5" />
-            <span>AI Clone (High Risk)</span>
+            <span>AI Clone (Demo)</span>
           </button>
 
         </div>

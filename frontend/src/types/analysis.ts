@@ -7,6 +7,7 @@ export interface AnalysisResult {
   risk_score: number;
   status: RiskStatus;
   reasons: string[];
+  isDemo?: boolean;
 }
 
 export interface SamplePreset {

@@ -7,6 +7,7 @@ const mockResponses: Record<RiskStatus, AnalysisResult> = {
     speaker_match: null,
     risk_score: 0.07,
     status: 'SAFE',
+    isDemo: true,
     reasons: [
       'Natural phase dynamics and clean harmonic spectrum detected',
       'No synthetic audio artifacts present'
@@ -18,6 +19,7 @@ const mockResponses: Record<RiskStatus, AnalysisResult> = {
     speaker_match: null,
     risk_score: 0.50,
     status: 'SUSPICIOUS',
+    isDemo: true,
     reasons: [
       'Elevated synthetic voice probability detected',
       'Minor acoustic reverberation anomalies present'
@@ -29,6 +31,7 @@ const mockResponses: Record<RiskStatus, AnalysisResult> = {
     speaker_match: null,
     risk_score: 0.91,
     status: 'HIGH_RISK',
+    isDemo: true,
     reasons: [
       'Synthetic voice characteristics detected',
       'Possible replay characteristics detected'

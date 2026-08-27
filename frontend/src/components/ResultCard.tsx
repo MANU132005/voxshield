@@ -37,6 +37,25 @@ export const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
   return (
     <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
       
+      {/* Mode Indicator Banner */}
+      {result.isDemo ? (
+        <div className="p-3 rounded-xl bg-amber-950/80 border border-amber-500/50 text-amber-300 text-xs font-bold flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>DEMO SIMULATION — NOT A REAL ANALYSIS</span>
+          </div>
+          <span className="text-[10px] px-2 py-0.5 rounded bg-amber-900/60 text-amber-200 border border-amber-500/30">Preset Preview</span>
+        </div>
+      ) : (
+        <div className="p-3 rounded-xl bg-cyan-950/80 border border-cyan-500/50 text-cyan-300 text-xs font-bold flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0" />
+            <span>LIVE AI ANALYSIS — Connected to VoxShield Render Backend</span>
+          </div>
+          <span className="text-[10px] px-2 py-0.5 rounded bg-cyan-900/60 text-cyan-200 border border-cyan-500/30">Real PyTorch Inference</span>
+        </div>
+      )}
+
       {/* Top Header & Status */}
       <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
         <div>
