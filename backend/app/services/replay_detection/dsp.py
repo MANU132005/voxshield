@@ -234,43 +234,47 @@ class ReplayDetector:
         triggered_reasons: List[str] = []
         score_components: List[float] = []
 
-        # Feature A: High-Frequency Attenuation Indicator (Speaker band-limiting < 4kHz)
-        # Replayed audio through small mobile speakers suffers heavy high-frequency loss
-        if feats.high_freq_attenuation_ratio < 0.08:
-            score_components.append(0.35)
-            triggered_reasons.append("High-frequency spectral attenuation detected (indicates speaker output band-limiting)")
-        elif feats.high_freq_attenuation_ratio < 0.18:
-            score_components.append(0.18)
-
-        # Feature B: Signal Saturation Clipping (Amplifier / Mic saturation)
+        # Feature A: Signal Saturation Clipping (Amplifier / Mic Overdrive Saturation)
+        # Replayed audio through overdriven speakers/microphones exhibits heavy amplitude clipping
         if feats.clipping_ratio > 0.01:
-            score_components.append(0.30)
-            triggered_reasons.append("Elevated signal clipping ratio detected (indicates amplifier or microphone saturation)")
-        elif feats.clipping_ratio > 0.001:
-            score_components.append(0.15)
-
-        # Feature C: Transient / Pop Anomalies
-        if feats.transient_density > 12.0:
+            score_components.append(0.35)
+            triggered_reasons.append("Severe signal clipping ratio detected (indicates amplifier or microphone saturation)")
+        elif feats.clipping_ratio > 0.002:
             score_components.append(0.20)
-            triggered_reasons.append("Transient energy discontinuities / pop anomalies detected")
-        elif feats.transient_density > 6.0:
-            score_components.append(0.10)
+            triggered_reasons.append("Elevated signal clipping ratio detected")
 
-        # Feature D: Elevated Acoustic Noise Floor (Re-recording ambient room noise)
-        if feats.estimated_noise_floor_db > -35.0:
+        # Feature B: Loudspeaker Band-Limiting & Brickwall Attenuation
+        # Mobile/telephone loudspeaker replay causes low spectral rolloff co-occurring with low SNR
+        if feats.spectral_rolloff_hz < 2500.0 and feats.signal_to_noise_ratio_db < 18.0:
+            score_components.append(0.30)
+            triggered_reasons.append("Severe spectral band-limiting detected (indicates small speaker playback cutoff)")
+        elif feats.spectral_rolloff_hz < 3200.0 and feats.high_freq_energy_ratio < 0.001 and feats.signal_to_noise_ratio_db < 22.0:
+            score_components.append(0.18)
+            triggered_reasons.append("Moderate high-frequency attenuation detected")
+
+        # Feature C: Re-recording Ambient Noise Floor & Low Signal-to-Noise Ratio
+        # Double room ambient noise accumulation causes high noise floor AND low SNR
+        if feats.estimated_noise_floor_db > -28.0 and feats.signal_to_noise_ratio_db < 15.0:
+            score_components.append(0.25)
+            triggered_reasons.append("Elevated re-recording ambient noise floor indicator")
+        elif feats.estimated_noise_floor_db > -32.0 and feats.signal_to_noise_ratio_db < 20.0:
+            score_components.append(0.12)
+
+        # Feature D: Compressed Dynamic Crest Factor (Loudspeaker AGC / Dynamic Range Compression)
+        if feats.peak_to_rms_ratio < 3.2 and feats.dynamic_range_db < 15.0:
+            score_components.append(0.20)
+            triggered_reasons.append("Compressed acoustic crest factor (indicates loudspeaker AGC compression)")
+
+        # Feature E: Non-Speech Pop / Transient Discontinuities with Clipping
+        if feats.transient_density > 60.0 and feats.clipping_ratio > 0.001:
             score_components.append(0.15)
-            triggered_reasons.append("Elevated acoustic noise floor indicator")
-
-        # Feature E: Spectral Flux Variance Anomaly
-        if feats.spectral_flux_std > 8.0:
-            score_components.append(0.10)
-            triggered_reasons.append("Unusual spectral flux variation across time frames")
+            triggered_reasons.append("Transient energy pop anomalies detected")
 
         # 3. WEIGHTED SCORE CALCULATION & RISK LEVEL ASSIGNMENT
         if score_components:
             raw_score = sum(score_components)
         else:
-            raw_score = 0.05  # Baseline minimal score
+            raw_score = 0.02  # Baseline minimal score for clean audio
 
         replay_score = float(np.clip(raw_score, 0.0, 1.0))
         confidence = float(round(abs(replay_score - 0.5) * 2.0, 4))
