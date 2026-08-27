@@ -2,11 +2,12 @@ import axios from 'axios';
 import { AnalysisResult, RiskStatus } from '../types/analysis';
 import { mockAnalyzeAudio } from './mockApi';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000').replace(/\/+$/, '');
+const API_BASE_URL = rawBaseUrl.endsWith('/api/v1') ? rawBaseUrl : `${rawBaseUrl}/api/v1`;
 const DEFAULT_USE_MOCK = import.meta.env.VITE_USE_MOCK_API === 'true';
 
 const apiClient = axios.create({
-  baseURL: `${API_BASE_URL}/api/v1`,
+  baseURL: API_BASE_URL,
   headers: {
     'Accept': 'application/json',
   },
@@ -18,7 +19,14 @@ export const checkHealth = async (): Promise<{ status: string }> => {
     const response = await apiClient.get('/health');
     return response.data;
   } catch (error) {
-    return { status: 'offline' };
+    try {
+      const rootUrl = rawBaseUrl.replace(/\/api\/v1$/, '');
+      const rootClient = axios.create({ baseURL: rootUrl, timeout: 5000 });
+      const response = await rootClient.get('/health');
+      return response.data;
+    } catch {
+      return { status: 'offline' };
+    }
   }
 };
 

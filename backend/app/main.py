@@ -74,6 +74,15 @@ async def root():
     }
 
 
+@app.get("/health", summary="Global Health Probe")
+async def global_health():
+    """
+    Root level health probe endpoint returning {"status": "ok"}.
+    """
+    return {"status": "ok"}
+
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
