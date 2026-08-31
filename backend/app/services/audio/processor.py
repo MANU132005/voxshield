@@ -83,10 +83,12 @@ class AudioProcessor:
         if orig_sr != self.target_sample_rate:
             signal = self._resample(signal, orig_sr, self.target_sample_rate)
 
-        # 5. Signal Quality & Duration Check (before normalization to detect true silence)
-        peak_amp = float(np.max(np.abs(signal))) if len(signal) > 0 else 0.0
-        if peak_amp < 1e-5:
-            raise AudioProcessingError(f"{file_desc} contains no audible signal (complete silence).")
+        # 5. Signal Quality & Duration Check (before normalization to detect true silence/ambient room noise)
+        raw_peak = float(np.max(np.abs(signal))) if len(signal) > 0 else 0.0
+        rms_energy = float(np.sqrt(np.mean(signal**2))) if len(signal) > 0 else 0.0
+
+        if raw_peak < 0.008 or rms_energy < 0.0015:
+            raise AudioProcessingError(f"{file_desc} contains no audible speech or voice signal (ambient background silence). Please speak clearly into the microphone.")
 
         duration = len(signal) / float(self.target_sample_rate)
         if duration < self.min_duration_seconds:
@@ -95,7 +97,7 @@ class AudioProcessor:
             )
 
         # 6. Peak Normalization to -1.0 dBFS
-        signal = self._normalize_peak(signal, peak_amp)
+        signal = self._normalize_peak(signal, raw_peak)
         final_peak = float(np.max(np.abs(signal)))
 
         return ProcessedAudio(
