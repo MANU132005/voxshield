@@ -49,13 +49,13 @@ app.add_middleware(
     window_seconds=settings.RATE_LIMIT_WINDOW_SECONDS
 )
 
-# 4. Configure Hardened CORS Middleware
+# 4. Configure Secure CORS Middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=settings.CORS_ORIGINS if "*" not in settings.CORS_ORIGINS else ["*"],
     allow_origin_regex=r"https://.*\.vercel\.app|http://localhost:\d+|http://127\.0\.0\.1:\d+",
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS", "HEAD"],
     allow_headers=["*"],
     expose_headers=["X-Request-ID", "Retry-After"]
 )
@@ -82,6 +82,11 @@ async def global_health():
     Root level health probe endpoint returning {"status": "ok"}.
     """
     return {"status": "ok"}
+
+
+@app.get("/openapi.json", summary="Root OpenAPI Spec Alias", include_in_schema=False)
+async def openapi_alias():
+    return app.openapi()
 
 
 
