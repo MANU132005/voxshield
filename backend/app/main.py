@@ -53,7 +53,7 @@ app.add_middleware(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS if "*" not in settings.CORS_ORIGINS else ["*"],
-    allow_origin_regex=r"https://.*\.vercel\.app|http://localhost:\d+|http://127\.0\.0\.1:\d+",
+    allow_origin_regex=r"https://voxshield.*\.vercel\.app|http://localhost:\d+|http://127\.0\.0\.1:\d+",
     allow_credentials=False,
     allow_methods=["GET", "POST", "OPTIONS", "HEAD"],
     allow_headers=["*"],
@@ -86,6 +86,11 @@ async def global_health():
 
 @app.get("/openapi.json", summary="Root OpenAPI Spec Alias", include_in_schema=False)
 async def openapi_alias():
+    return app.openapi()
+
+
+@app.get(f"{settings.API_V1_STR}/openapi.json", summary="API v1 OpenAPI Spec Alias", include_in_schema=False)
+async def api_v1_openapi_alias():
     return app.openapi()
 
 
