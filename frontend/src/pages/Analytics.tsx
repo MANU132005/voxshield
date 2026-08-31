@@ -1,15 +1,29 @@
 import React from 'react';
-import { Terminal, Code, Cpu, Layers, ArrowRight } from 'lucide-react';
+import { Terminal, Code, Cpu, Layers, ArrowRight, ExternalLink, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 export const Analytics: React.FC = () => {
+  const backendBaseUrl = 'https://voxshield-backend-wg3p.onrender.com';
+
   return (
     <div className="space-y-8 pb-12">
       
       {/* Header */}
-      <div>
-        <span className="text-[11px] uppercase tracking-widest font-extrabold text-cyan-400">VOXSHIELD API</span>
-        <h1 className="text-xl sm:text-2xl font-bold text-white mt-1">Developer Integration & Architecture</h1>
-        <p className="text-xs text-slate-400 mt-1">REST API endpoints and system architecture for integrating VoxShield into security workflows.</p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900/60 p-6 rounded-2xl border border-slate-800">
+        <div>
+          <span className="text-[11px] uppercase tracking-widest font-extrabold text-cyan-400">VOXSHIELD API</span>
+          <h1 className="text-xl sm:text-2xl font-bold text-white mt-1">Developer Integration & Architecture</h1>
+          <p className="text-xs text-slate-400 mt-1">Production REST API endpoints and system architecture for integrating VoxShield audio anti-spoofing.</p>
+        </div>
+
+        <a
+          href={`${backendBaseUrl}/api/v1/docs`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold shadow-md transition-all shrink-0"
+        >
+          <span>Open Interactive Swagger Docs</span>
+          <ExternalLink className="w-3.5 h-3.5" />
+        </a>
       </div>
 
       {/* Architecture Flow Diagram */}
