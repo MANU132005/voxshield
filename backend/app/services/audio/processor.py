@@ -87,7 +87,7 @@ class AudioProcessor:
         raw_peak = float(np.max(np.abs(signal))) if len(signal) > 0 else 0.0
         rms_energy = float(np.sqrt(np.mean(signal**2))) if len(signal) > 0 else 0.0
 
-        if raw_peak < 0.008 or rms_energy < 0.0015:
+        if raw_peak < 0.035 or rms_energy < 0.0035:
             raise AudioProcessingError(f"{file_desc} contains no audible speech or voice signal (ambient background silence). Please speak clearly into the microphone.")
 
         duration = len(signal) / float(self.target_sample_rate)
