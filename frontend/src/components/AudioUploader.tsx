@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { UploadCloud, FileAudio, CheckCircle2, ShieldAlert, AlertTriangle, Sparkles } from 'lucide-react';
-import { formatFileSize, createDemoWavBlob } from '../utils/audioUtils';
+import { UploadCloud, FileAudio } from 'lucide-react';
+import { formatFileSize } from '../utils/audioUtils';
 import { RiskStatus } from '../types/analysis';
 
 interface AudioUploaderProps {
@@ -63,7 +63,7 @@ export const AudioUploader: React.FC<AudioUploaderProps> = ({
         <input
           ref={fileInputRef}
           type="file"
-          accept="audio/*"
+          accept=".wav,.mp3,.flac,.m4a,.ogg,.webm,audio/*"
           className="hidden"
           onChange={handleFileChange}
         />
@@ -77,7 +77,7 @@ export const AudioUploader: React.FC<AudioUploaderProps> = ({
             )}
           </p>
           <div className="text-[11px] text-slate-400 space-y-0.5">
-            <p>Supported formats: <strong className="text-slate-300">WAV, MP3, FLAC, M4A</strong></p>
+            <p>Supported formats: <strong className="text-slate-300">WAV, MP3, FLAC, M4A, OGG, WEBM</strong></p>
             <p>Maximum file size: <strong className="text-slate-300">25 MB</strong></p>
           </div>
         </div>

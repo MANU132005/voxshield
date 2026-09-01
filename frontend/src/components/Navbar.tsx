@@ -81,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Activity className={`w-3.5 h-3.5 ${backendStatus === 'online' ? 'text-emerald-400 animate-pulse' : 'text-amber-500'}`} />
             <span className="text-slate-400">Backend:</span>
             <span className={`font-semibold ${backendStatus === 'online' ? 'text-emerald-400' : 'text-amber-400'}`}>
-              {backendStatus === 'online' ? 'Online' : 'Mock Mode'}
+              {backendStatus === 'online' ? 'Online' : backendStatus === 'checking' ? 'Connecting...' : 'Standby'}
             </span>
           </div>
 
