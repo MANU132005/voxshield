@@ -11,7 +11,7 @@ const apiClient = axios.create({
   headers: {
     'Accept': 'application/json',
   },
-  timeout: 30000,
+  timeout: 90000,
 });
 
 export const checkHealth = async (): Promise<{ status: string }> => {
@@ -67,7 +67,7 @@ export const analyzeAudio = async (
   } catch (error: any) {
     console.error('[VOXSHIELD] Real backend analysis failed:', error);
     const errorDetail = error.response?.data?.detail 
-      || (error.code === 'ECONNABORTED' ? 'Backend request timed out (30s).' : null)
+      || (error.code === 'ECONNABORTED' ? 'Backend request timed out (90s). The server was likely sleeping (Render cold start). Please click Analyze again.' : null)
       || (error.response ? `HTTP ${error.response.status}: Analysis request failed.` : null)
       || 'Unable to connect to VoxShield backend at ' + targetUrl;
 
