@@ -87,76 +87,81 @@ async def analyze_audio(file: UploadFile = File(...)):
 
     timeline.record_stage(3, "Upload Security Verification")
 
-    # Audio preprocessing pipeline (Decode, Mono, 16kHz, Peak Normalize, Quality Checks)
     try:
-        processed_audio = audio_processor.load_and_preprocess(contents, safe_filename)
-        timeline.record_stage(4, "Audio Normalization & Resampling")
-        features = audio_processor.extract_features(processed_audio)
-        timeline.record_stage(5, "Spectrogram & Feature Extraction")
-    except AudioProcessingError as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e)
+        # Audio preprocessing pipeline (Decode, Mono, 16kHz, Peak Normalize, Quality Checks)
+        try:
+            processed_audio = audio_processor.load_and_preprocess(contents, safe_filename)
+            timeline.record_stage(4, "Audio Normalization & Resampling")
+            features = audio_processor.extract_features(processed_audio)
+            timeline.record_stage(5, "Spectrogram & Feature Extraction")
+        except AudioProcessingError as e:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=str(e)
+            )
+
+        # Execute AI anti-spoofing neural inference and DSP acoustic replay analysis
+        synthetic_result = detector.predict(features)
+        timeline.record_stage(6, "Neural Anti-Spoofing Inference")
+
+        replay_result = replay_dsp.analyze_replay_detailed(processed_audio)
+        timeline.record_stage(7, "Acoustic Replay DSP Analysis")
+
+        # Execute multi-modal threat risk assessment
+        assessment = risk_evaluator.evaluate_risk(
+            synthetic_input=synthetic_result,
+            replay_input=replay_result,
+            processed_audio=processed_audio
         )
+        timeline.record_stage(8, "Multi-Signal Threat Risk Assessment")
 
-    # Execute AI anti-spoofing neural inference and DSP acoustic replay analysis
-    synthetic_result = detector.predict(features)
-    timeline.record_stage(6, "Neural Anti-Spoofing Inference")
+        # Execute Forensic Intelligence Analysis
+        forensic_assessment = forensic_engine.evaluate_forensics(
+            synthetic_score=synthetic_result.synthetic_score,
+            replay_score=replay_result.replay_score,
+            signal=processed_audio.audio_signal,
+            sample_rate=processed_audio.sample_rate
+        )
+        timeline.record_stage(9, "Forensic Intelligence Analysis")
 
-    replay_result = replay_dsp.analyze_replay_detailed(processed_audio)
-    timeline.record_stage(7, "Acoustic Replay DSP Analysis")
+        # Compute Decision Explanation
+        explanation = decision_explainer.explain_decision(
+            decision=forensic_assessment.decision,
+            risk_score=forensic_assessment.risk_score,
+            confidence_indicator=forensic_assessment.confidence_indicator,
+            evidence_dicts=forensic_assessment.evidence,
+            counter_evidence_dicts=forensic_assessment.counter_evidence,
+            limitations=forensic_assessment.limitations,
+            claim_status=forensic_assessment.claim_status
+        )
+        timeline.record_stage(10, "Decision Explainability & Final Response Assembly")
 
-    # Execute multi-modal threat risk assessment
-    assessment = risk_evaluator.evaluate_risk(
-        synthetic_input=synthetic_result,
-        replay_input=replay_result,
-        processed_audio=processed_audio
-    )
-    timeline.record_stage(8, "Multi-Signal Threat Risk Assessment")
+        # Legacy risk score mapping for API response compatibility [0.0 - 1.0]
+        legacy_risk_score = round(assessment.risk_score / 100.0, 2)
+        if legacy_risk_score >= 0.70:
+            legacy_status = "HIGH_RISK"
+        elif legacy_risk_score >= 0.35:
+            legacy_status = "SUSPICIOUS"
+        else:
+            legacy_status = "SAFE"
 
-    # Execute Forensic Intelligence Analysis
-    forensic_assessment = forensic_engine.evaluate_forensics(
-        synthetic_score=synthetic_result.synthetic_score,
-        replay_score=replay_result.replay_score,
-        signal=processed_audio.audio_signal,
-        sample_rate=processed_audio.sample_rate
-    )
-    timeline.record_stage(9, "Forensic Intelligence Analysis")
-
-    # Compute Decision Explanation
-    explanation = decision_explainer.explain_decision(
-        decision=forensic_assessment.decision,
-        risk_score=forensic_assessment.risk_score,
-        confidence_indicator=forensic_assessment.confidence_indicator,
-        evidence_dicts=forensic_assessment.evidence,
-        counter_evidence_dicts=forensic_assessment.counter_evidence,
-        limitations=forensic_assessment.limitations,
-        claim_status=forensic_assessment.claim_status
-    )
-    timeline.record_stage(10, "Decision Explainability & Final Response Assembly")
-
-    # Legacy risk score mapping for API response compatibility [0.0 - 1.0]
-    legacy_risk_score = round(assessment.risk_score / 100.0, 2)
-    if legacy_risk_score >= 0.70:
-        legacy_status = "HIGH_RISK"
-    elif legacy_risk_score >= 0.35:
-        legacy_status = "SUSPICIOUS"
-    else:
-        legacy_status = "SAFE"
-
-    return AnalysisResponse(
-        synthetic_score=round(synthetic_result.synthetic_score, 2),
-        replay_score=round(replay_result.replay_score, 2),
-        speaker_match=None,
-        risk_score=legacy_risk_score,
-        status=legacy_status,
-        reasons=assessment.reasons,
-        risk_level=assessment.risk_level,
-        verdict=assessment.verdict,
-        confidence=assessment.confidence,
-        evidence=assessment.evidence,
-        evaluator_version=assessment.evaluator_version,
-        forensics=asdict(forensic_assessment),
-        explainability=asdict(explanation),
-        forensic_timeline=timeline.get_timeline()
-    )
+        return AnalysisResponse(
+            synthetic_score=round(synthetic_result.synthetic_score, 2),
+            replay_score=round(replay_result.replay_score, 2),
+            speaker_match=None,
+            risk_score=legacy_risk_score,
+            status=legacy_status,
+            reasons=assessment.reasons,
+            risk_level=assessment.risk_level,
+            verdict=assessment.verdict,
+            confidence=assessment.confidence,
+            evidence=assessment.evidence,
+            evaluator_version=assessment.evaluator_version,
+            forensics=asdict(forensic_assessment),
+            explainability=asdict(explanation),
+            forensic_timeline=timeline.get_timeline()
+        )
+    finally:
+        import gc
+        contents = None
+        gc.collect()

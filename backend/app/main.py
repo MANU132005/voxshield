@@ -1,4 +1,11 @@
 import logging
+import gc
+import torch
+
+# Optimize PyTorch memory footprint for low-RAM containers (Render 512MB RAM limit)
+torch.set_num_threads(1)
+torch.set_num_interop_threads(1)
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
