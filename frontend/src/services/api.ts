@@ -44,33 +44,49 @@ export const analyzeAudio = async (
   const targetUrl = `${API_BASE_URL}/analyze`;
   console.log('[VOXSHIELD] REAL API ANALYSIS - Sending POST request to:', targetUrl);
 
-  try {
-    const formData = new FormData();
-    const actualMime = audioFile.type || 'audio/webm';
-    const ext = actualMime.includes('mp4') ? 'm4a' : actualMime.includes('webm') ? 'webm' : 'wav';
+  const formData = new FormData();
+  const actualMime = audioFile.type || 'audio/webm';
+  const ext = actualMime.includes('mp4') ? 'm4a' : actualMime.includes('webm') ? 'webm' : 'wav';
 
-    const fileToUpload = audioFile instanceof File 
-      ? audioFile 
-      : new File([audioFile], `mic_recording.${ext}`, { type: actualMime });
+  const fileToUpload = audioFile instanceof File 
+    ? audioFile 
+    : new File([audioFile], `mic_recording.${ext}`, { type: actualMime });
 
-    console.log(`[VOXSHIELD] Payload filename: ${fileToUpload.name}, MIME: ${fileToUpload.type}, Size: ${fileToUpload.size} bytes`);
-    formData.append('file', fileToUpload);
+  formData.append('file', fileToUpload);
 
-    const response = await apiClient.post<AnalysisResult>('/analyze', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+  const maxAttempts = 4;
+  let lastError: any = null;
 
-    console.log('[VOXSHIELD] Real Backend response received:', response.data);
-    return { ...response.data, isDemo: false };
-  } catch (error: any) {
-    console.error('[VOXSHIELD] Real backend analysis failed:', error);
-    const errorDetail = error.response?.data?.detail 
-      || (error.code === 'ECONNABORTED' ? 'Backend request timed out (90s). The server was likely sleeping (Render cold start). Please click Analyze again.' : null)
-      || (error.response ? `HTTP ${error.response.status}: Analysis request failed.` : null)
-      || 'Unable to connect to VoxShield backend at ' + targetUrl;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      if (attempt > 1) {
+        console.log(`[VOXSHIELD] Retry attempt ${attempt}/${maxAttempts} waking backend...`);
+        await new Promise(res => setTimeout(res, 4000));
+      }
 
-    throw new Error(`Real backend analysis failed. No simulated result was used. Details: ${errorDetail}`);
+      const response = await apiClient.post<AnalysisResult>('/analyze', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('[VOXSHIELD] Real Backend response received:', response.data);
+      return { ...response.data, isDemo: false };
+    } catch (error: any) {
+      lastError = error;
+      console.warn(`[VOXSHIELD] Real backend analysis attempt ${attempt} failed:`, error.message);
+
+      // If it's a 400 Bad Request (e.g. silence or invalid format), do NOT retry, throw immediately
+      if (error.response && error.response.status === 400) {
+        break;
+      }
+    }
   }
+
+  const errorDetail = lastError?.response?.data?.detail 
+    || (lastError?.code === 'ECONNABORTED' ? 'Backend request timed out (90s). Render server was sleeping. Please try again.' : null)
+    || (lastError?.response ? `HTTP ${lastError.response.status}: Analysis request failed.` : null)
+    || 'Unable to connect to VoxShield backend at ' + targetUrl + ' (Server may be starting up).';
+
+  throw new Error(`Real backend analysis failed. No simulated result was used. Details: ${errorDetail}`);
 };
